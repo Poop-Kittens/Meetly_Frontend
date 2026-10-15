@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  APP_NAME: Meetly_Frontend
+  APP_NAME: Meetly-Frontend
   IMAGE_NAME: meetly_frontend
 
 jobs:
