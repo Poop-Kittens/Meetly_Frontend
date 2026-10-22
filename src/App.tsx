@@ -1,7 +1,8 @@
+import Home from "./pages/Home/Home";
 import "./App.css";
 
 function App() {
-  return <div>Meetly</div>;
+  return <Home />;
 }
 
 export default App;
