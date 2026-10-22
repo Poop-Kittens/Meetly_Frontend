@@ -5,9 +5,9 @@ import App from "./App.tsx";
 import { UserProvider } from "./context/userContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-        <UserProvider>
-            <App />
-        </UserProvider>
-    </StrictMode>,
+  <StrictMode>
+    <UserProvider>
+      <App />
+    </UserProvider>
+  </StrictMode>,
 );
