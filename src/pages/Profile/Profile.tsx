@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ApiError, getCurrentUser, getMyMeetings } from "../../api/Api";
+import { ApiError, getCurrentUser, getMyMeetings } from "../../api/api";
 import UserCard from "../../components/UserCard/UserCard";
 import type { BasicMeetingResponse, UserResponse } from "../../types/types";
 import "./Profile.css";

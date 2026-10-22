@@ -1,23 +1,24 @@
 import { useState, type SubmitEvent } from "react";
+import type { LoginRequest, UserRegister } from "../../types/types";
 import "./LoginForm.css";
 
 interface LoginFormProps {
-  onLogin: () => void;
-  onRegister: () => void;
+  onLogin: (request: LoginRequest) => void;
+  onRegister: (request: UserRegister) => void;
 }
 
 function LoginForm({ onLogin, onRegister }: LoginFormProps) {
   const [isRegistering, setIsRegistering] = useState<boolean>(false);
-  const [username, setUsername] = useState<string>("");
+  const [userName, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     if (isRegistering) {
-      onRegister();
+      onRegister({ userName, email, password });
     } else {
-      onLogin();
+      onLogin({ email, password });
     }
   };
 
@@ -30,7 +31,7 @@ function LoginForm({ onLogin, onRegister }: LoginFormProps) {
           <input
             type="text"
             placeholder="Jane Doe"
-            value={username}
+            value={userName}
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
           />
