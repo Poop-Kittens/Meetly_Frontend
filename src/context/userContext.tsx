@@ -4,32 +4,54 @@ import type { User } from "../types/types";
 import { useState } from "react";
 import { useContext } from "react";
 
+// Beskriver vilken information vi vill dela mellan komponenterna.
+// user = användaren (eller null om ingen finns).
+// setUser = funktionen som ändrar användaren.
+// void betyder att funktionen inte returnerar något.
 interface userContext {
     user: User | null;
-    setUser: (user: User | null) => void; //metoden får ta emot en user eller ingen user. metoden returnerar inget.
+    setUser: (user: User | null) => void;
 }
-//UserContextType är ett kontrakt som säger:
-//Mitt Context ska innehålla en användare och en funktion för att ändra användaren.
+
+// Skapar ett Context-objekt och sparar det i konstanten UserContext.
+// Det används sedan av både Provider (som delar ut information)
+// och useContext (som läser informationen).
+// <userContext | undefined> anger vilka typer Context får innehålla.
+// undefined är standardvärdet om ingen Provider finns.
 const UserContext = createContext<userContext | undefined>(undefined);
 
+// Skapar en komponent som ska omsluta andra komponenter.
+// children är allt som ligger mellan <UserProvider> och </UserProvider>.
+// ReactNode betyder att children får vara sådant React kan visa.
 export function UserProvider({ children }: { children: ReactNode }) {
+    // Skapar en variabel (user) och en funktion (setUser) som ändrar den.
+    // User | null betyder att variabeln får innehålla en användare eller null.
+    // Vi börjar med null eftersom ingen användare har hämtats ännu.
     const [user, setUser] = useState<User | null>(null);
 
     return (
+        // Provider gör informationen tillgänglig för komponenterna inuti.
+        // value bestämmer vad vi delar: både user och setUser.
         <UserContext.Provider value={{ user, setUser }}>
+            {/* Visar komponenterna som UserProvider omsluter, t.ex. App. */}
             {children}
         </UserContext.Provider>
     );
-} //Vi har skapat ett UserContext som gör det möjligt att dela information om den inloggade användaren mellan olika komponenter i React, utan att behöva skicka den via props.
-//Sedan skapade vi en UserProvider som håller reda på användaren med useState.
-// Från början är användaren null, men med setUser kan vi ändra det.
-// Providern delar sedan ut både user och setUser till alla komponenter som ligger inuti den (children).
+}
+
+// En egen funktion (custom hook) som andra komponenter kan använda
+// för att få tillgång till informationen i UserContext.
 export function useUser() {
+    // Hämtar värdet från närmaste UserContext.Provider ovanför komponenten.
+    // Det innehåller både user och setUser.
     const context = useContext(UserContext);
 
+    // Om ingen Provider finns får vi undefined.
+    // Då visar vi ett fel istället för att fortsätta.
     if (context === undefined) {
         throw new Error("useUser måste användas inom UserProvider");
     }
 
+    // Skickar tillbaka user och setUser till komponenten som anropade useUser().
     return context;
 }
