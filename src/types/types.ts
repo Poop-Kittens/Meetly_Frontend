@@ -1,4 +1,3 @@
-import { configureStore } from "@reduxjs/toolkit";
 import type { components, paths } from "./api";
 
 type Schemas = components["schemas"];
