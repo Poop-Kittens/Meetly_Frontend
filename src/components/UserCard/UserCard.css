@@ -1,0 +1,32 @@
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.user-card__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  background: #5b6cff;
+}
+
+.user-card__name {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.user-card__email {
+  margin: 0.25rem 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
