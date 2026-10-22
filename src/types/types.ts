@@ -1,1 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+}
