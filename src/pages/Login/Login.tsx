@@ -12,13 +12,17 @@ function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
+  const logInAndEnter = async (request: LoginRequest) => {
+    await login(request); // sets the cookie
+    const loggedInUser = await getCurrentUser();
+    setUser(loggedInUser);
+    navigate("/home");
+  };
+
   const handleLogin = async (request: LoginRequest) => {
     try {
       setError(null);
-      await login(request);
-      const loggedInUser = await getCurrentUser();
-      setUser(loggedInUser);
-      navigate("/home");
+      await logInAndEnter(request);
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Något gick fel.");
     }
@@ -28,7 +32,11 @@ function Login() {
     try {
       setError(null);
       await register(request);
-      // either log in automatically or switch the form back to login mode
+      // Log in with the credentials the user just registered with
+      await logInAndEnter({
+        email: request.email ?? "",
+        password: request.password ?? "",
+      });
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Något gick fel.");
     }
@@ -36,11 +44,8 @@ function Login() {
 
   return (
     <div className="login-page">
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        <LoginForm onLogin={handleLogin} onRegister={handleRegister} />
-      )}
+      {error ?? <p>{error}</p>}
+      <LoginForm onLogin={handleLogin} onRegister={handleRegister} />
     </div>
   );
 }

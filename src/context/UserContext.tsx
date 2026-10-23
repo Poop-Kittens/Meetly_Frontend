@@ -3,8 +3,10 @@ import {
   type ReactNode,
   useState,
   useContext,
+  useEffect,
   useMemo,
 } from "react";
+import { getCurrentUser } from "../api/api";
 import type { UserResponse } from "../types/types";
 
 // Beskriver vilken information vi vill dela mellan komponenterna.
@@ -14,6 +16,7 @@ import type { UserResponse } from "../types/types";
 interface UserContextType {
   user: UserResponse | null;
   setUser: (user: UserResponse | null) => void;
+  loading: boolean;
 }
 
 // Skapar ett Context-objekt och sparar det i konstanten UserContext.
@@ -31,9 +34,24 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // User | null betyder att variabeln får innehålla en användare eller null.
   // Vi börjar med null eftersom ingen användare har hämtats ännu.
   const [user, setUser] = useState<UserResponse | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  // Laddar in användaren på nytt ifall sidan skulle laddas om
+  useEffect(() => {
+    const restoreSession = async () => {
+      try {
+        setUser(await getCurrentUser());
+      } catch (e) {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    restoreSession();
+  }, []);
 
   // Sparar user värdet i minnet så att den inte renderas om på nytt varje gång.
-  const value = useMemo(() => ({ user, setUser }), [user]);
+  const value = useMemo(() => ({ user, setUser, loading }), [user, loading]);
 
   return (
     // Provider gör informationen tillgänglig för komponenterna inuti.

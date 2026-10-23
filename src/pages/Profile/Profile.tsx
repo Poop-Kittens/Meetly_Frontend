@@ -1,36 +1,21 @@
-import { useEffect, useState } from "react";
-import { ApiError, getCurrentUser, getMyMeetings } from "../../api/Api";
 import UserCard from "../../components/UserCard/UserCard";
-import type { UserResponse } from "../../types/types";
+import { Navigate } from "react-router";
 import "./Profile.css";
 import Navbar from "../../components/Navbar/Navbar";
+import { useUser } from "../../context/UserContext";
 
 function Profile() {
-  const [user, setUser] = useState<UserResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const load = async () => {
-      try {
-        setError(null);
-        setUser(await getCurrentUser());
-      } catch (e) {
-        console.error(e);
-        setError(e instanceof ApiError ? e.message : "Något gick fel.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, []);
+  const { user, loading } = useUser();
 
   if (loading) {
     return <p>Laddar...</p>;
   }
-  if (error || !user) {
-    return <p>{error ?? "Något gick fel."}</p>;
+
+  // Navigerar tillbaka till login sidan om det inte finns någon användare
+  if (!user) {
+    return <Navigate to="/" replace />;
   }
+
   return (
     <main className="profile">
       <Navbar activePage="profile" />
