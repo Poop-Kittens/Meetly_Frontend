@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import type { ReactNode } from "react";
-import type { User } from "../types/types";
+import type { UserResponse } from "../types/types";
 import { useState } from "react";
 import { useContext } from "react";
 
@@ -9,8 +9,8 @@ import { useContext } from "react";
 // setUser = funktionen som ändrar användaren.
 // void betyder att funktionen inte returnerar något.
 interface userContext {
-    user: User | null;
-    setUser: (user: User | null) => void;
+    user: UserResponse | null;
+    setUser: (user: UserResponse | null) => void;
 }
 
 // Skapar ett Context-objekt och sparar det i konstanten UserContext.
@@ -27,11 +27,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     // Skapar en variabel (user) och en funktion (setUser) som ändrar den.
     // User | null betyder att variabeln får innehålla en användare eller null.
     // Vi börjar med null eftersom ingen användare har hämtats ännu.
-    const [user, setUser] = useState<User | null>({
-        id: "123",
-        name: "John Doe",
-        email: "john@meetly.com",
-    });
+    const [user, setUser] = useState<UserResponse | null>(null);
 
     return (
         // Provider gör informationen tillgänglig för komponenterna inuti.
