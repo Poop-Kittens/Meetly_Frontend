@@ -27,7 +27,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
     // Skapar en variabel (user) och en funktion (setUser) som ändrar den.
     // User | null betyder att variabeln får innehålla en användare eller null.
     // Vi börjar med null eftersom ingen användare har hämtats ännu.
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<User | null>({
+        id: "123",
+        name: "John Doe",
+        email: "john@meetly.com",
+    });
 
     return (
         // Provider gör informationen tillgänglig för komponenterna inuti.

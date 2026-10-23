@@ -1,4 +1,5 @@
 import "../Navbar/Navbar.css";
+import { useUser } from "../../context/UserContext";
 function Navbar({
     ActivePage,
     ActiveUser,
