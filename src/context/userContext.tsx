@@ -1,14 +1,17 @@
-import { createContext } from "react";
-import type { ReactNode } from "react";
+import {
+  createContext,
+  type ReactNode,
+  useState,
+  useContext,
+  useMemo,
+} from "react";
 import type { UserResponse } from "../types/types";
-import { useState } from "react";
-import { useContext } from "react";
 
 // Beskriver vilken information vi vill dela mellan komponenterna.
 // user = användaren (eller null om ingen finns).
 // setUser = funktionen som ändrar användaren.
 // void betyder att funktionen inte returnerar något.
-interface userContext {
+interface UserContextType {
   user: UserResponse | null;
   setUser: (user: UserResponse | null) => void;
 }
@@ -18,7 +21,7 @@ interface userContext {
 // och useContext (som läser informationen).
 // <userContext | undefined> anger vilka typer Context får innehålla.
 // undefined är standardvärdet om ingen Provider finns.
-const UserContext = createContext<userContext | undefined>(undefined);
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
 // Skapar en komponent som ska omsluta andra komponenter.
 // children är allt som ligger mellan <UserProvider> och </UserProvider>.
@@ -29,10 +32,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // Vi börjar med null eftersom ingen användare har hämtats ännu.
   const [user, setUser] = useState<UserResponse | null>(null);
 
+  // Sparar user värdet i minnet så att den inte renderas om på nytt varje gång.
+  const value = useMemo(() => ({ user, setUser }), [user]);
+
   return (
     // Provider gör informationen tillgänglig för komponenterna inuti.
     // value bestämmer vad vi delar: både user och setUser.
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={value}>
       {/* Visar komponenterna som UserProvider omsluter, t.ex. App. */}
       {children}
     </UserContext.Provider>
