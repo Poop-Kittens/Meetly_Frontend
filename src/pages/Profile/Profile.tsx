@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { ApiError, getCurrentUser } from "../../api/api";
+import { ApiError, getCurrentUser, getMyMeetings } from "../../api/Api";
 import UserCard from "../../components/UserCard/UserCard";
 import type { UserResponse } from "../../types/types";
 import "./Profile.css";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Profile() {
   const [user, setUser] = useState<UserResponse | null>(null);
