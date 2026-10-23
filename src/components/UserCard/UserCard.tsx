@@ -1,12 +1,27 @@
 import type { UserResponse } from "../../types/types";
+import { useUser } from "../../context/UserContext";
+import { logout } from "../../api/api";
 import "./UserCard.css";
+import { useNavigate } from "react-router";
 
 interface UserCardProps {
   user: UserResponse;
 }
 
 function UserCard({ user }: UserCardProps) {
+  const { setUser } = useUser();
+  const navigate = useNavigate();
+
   const initial = (user.userName ?? "").charAt(0).toUpperCase();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } finally {
+      setUser(null);
+      navigate("/");
+    }
+  };
 
   return (
     <div className="user-card">
@@ -22,7 +37,9 @@ function UserCard({ user }: UserCardProps) {
       <hr />
       <div className="card-bottom">
         <p>Your personal account</p>
-        <button className="logout-btn">➜] Log out</button>
+        <button className="logout-btn" onClick={handleLogout}>
+          ➜] Log out
+        </button>
       </div>
     </div>
   );
