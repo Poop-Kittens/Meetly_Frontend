@@ -33,6 +33,7 @@ function Profile() {
   }
   return (
     <main className="profile">
+      <Navbar activePage="profile" />
       <h1>My pages</h1>
       <p>A little space for everything you´re part of.</p>
       <UserCard user={user} />
