@@ -1,44 +1,49 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router";
-import { register, login, ApiError } from "../../api/api";
+import { register, login, ApiError } from "../../api/Api";
 import type { LoginRequest, UserRegister } from "../../types/types";
+import { useUser } from "../../context/userContext";
+import { getCurrentUser } from "../../api/Api";
 import "./Login.css";
 
 import LoginForm from "../../components/LoginForm/LoginForm";
 
 function Login() {
-  // const navigate = useNavigate();
-  const [error, setError] = useState<string | null>(null);
+    const { setUser } = useUser();
+    // const navigate = useNavigate();
+    const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = async (request: LoginRequest) => {
-    try {
-      setError(null);
-      await login(request);
-      // navigate("/");
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Något gick fel.");
-    }
-  };
+    const handleLogin = async (request: LoginRequest) => {
+        try {
+            setError(null);
+            await login(request);
+            const loggedInUser = await getCurrentUser();
+            setUser(loggedInUser);
+            // navigate("/");
+        } catch (e) {
+            setError(e instanceof ApiError ? e.message : "Något gick fel.");
+        }
+    };
 
-  const handleRegister = async (request: UserRegister) => {
-    try {
-      setError(null);
-      await register(request);
-      // either log in automatically or switch the form back to login mode
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Något gick fel.");
-    }
-  };
+    const handleRegister = async (request: UserRegister) => {
+        try {
+            setError(null);
+            await register(request);
+            // either log in automatically or switch the form back to login mode
+        } catch (e) {
+            setError(e instanceof ApiError ? e.message : "Något gick fel.");
+        }
+    };
 
-  return (
-    <div className="login-page">
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        <LoginForm onLogin={handleLogin} onRegister={handleRegister} />
-      )}
-    </div>
-  );
+    return (
+        <div className="login-page">
+            {error ? (
+                <p>{error}</p>
+            ) : (
+                <LoginForm onLogin={handleLogin} onRegister={handleRegister} />
+            )}
+        </div>
+    );
 }
 
 export default Login;
