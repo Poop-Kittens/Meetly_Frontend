@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { register, login, ApiError } from "../../api/api";
 import type { LoginRequest, UserRegister } from "../../types/types";
 import "./Login.css";
@@ -7,14 +7,14 @@ import "./Login.css";
 import LoginForm from "../../components/LoginForm/LoginForm";
 
 function Login() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async (request: LoginRequest) => {
     try {
       setError(null);
       await login(request);
-      // navigate("/");
+      navigate("/home");
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Något gick fel.");
     }
