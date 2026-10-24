@@ -1,14 +1,14 @@
 import "../Navbar/Navbar.css";
-import { useUser } from "../../context/userContext";
-import { useNavigate } from "react-router";
+import { useUser } from "../../context/UserContext";
+import { Link } from "react-router";
 
 interface NavbarProps {
     activePage: string;
 }
 
 function Navbar({ activePage }: NavbarProps) {
-    const navigate = useNavigate();
     const { user } = useUser();
+
     let username = user?.userName ?? "";
     const userTag = username
         .trim()
@@ -21,13 +21,15 @@ function Navbar({ activePage }: NavbarProps) {
         <div className="navbar">
             <h2>Meetly</h2>
             {activePage != "HomePage" && (
-                <button className="NavButton" onClick={() => navigate(-1)}>
+                <Link className="NavButton" to="/home">
                     Go back
-                </button>
+                </Link>
             )}
             <div className="UserNameSection">
                 <h2 className="UserName">{username}</h2>
-                <p className="NameTag">{userTag}</p>
+                <Link className="user-link" to="/profile">
+                    <p className="NameTag">{userTag}</p>
+                </Link>
             </div>
         </div>
     );

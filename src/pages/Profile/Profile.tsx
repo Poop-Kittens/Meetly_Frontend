@@ -1,41 +1,29 @@
-import { useEffect, useState } from "react";
-import { ApiError, getCurrentUser, getMyMeetings } from "../../api/Api";
 import UserCard from "../../components/UserCard/UserCard";
-import type { BasicMeetingResponse, UserResponse } from "../../types/types";
+import { Navigate } from "react-router";
 import "./Profile.css";
 import Navbar from "../../components/Navbar/Navbar";
+import { useUser } from "../../context/UserContext";
 
 function Profile() {
-    const [user, setUser] = useState<UserResponse | null>(null);
-    const [, setMeetings] = useState<BasicMeetingResponse[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+  const { user, loading } = useUser();
 
-    useEffect(() => {
-        Promise.all([getCurrentUser(), getMyMeetings()])
-            .then(([u, m]) => {
-                setUser(u);
-                setMeetings(m);
-            })
-            .catch((err) => {
-                setError(
-                    err instanceof ApiError && err.status === 401
-                        ? "Du måste logga in för att se din profil."
-                        : "Kunde inte hämta profilen.",
-                );
-            })
-            .finally(() => setLoading(false));
-    }, []);
+  if (loading) {
+    return <p>Laddar...</p>;
+  }
 
-    if (loading) return <p>Laddar...</p>;
-    if (error || !user) return <p role="alert">{error ?? "Något gick fel."}</p>;
+  // Navigerar tillbaka till login sidan om det inte finns någon användare
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
 
-    return (
-        <main className="profile">
-            <Navbar activePage="profile" />
-            <UserCard user={user} />
-        </main>
-    );
+  return (
+    <main className="profile">
+      <Navbar activePage="profile" />
+      <h1>My pages</h1>
+      <p>A little space for everything you´re part of.</p>
+      <UserCard user={user} />
+    </main>
+  );
 }
 
 export default Profile;
