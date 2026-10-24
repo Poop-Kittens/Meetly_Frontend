@@ -1,0 +1,76 @@
+.meetingCard {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    grid-template-rows: auto auto auto;
+    column-gap: 20px;
+
+    min-height: 128px;
+    padding: 24px;
+
+    background-color: #ffffff;
+    border: 1px solid #e0e5df;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+}
+
+/* Datum */
+.dateDisplay {
+    grid-column: 1;
+    grid-row: 1 / 4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    min-height: 80px;
+
+    background-color: #f0f2ed;
+    border-radius: 8px;
+
+    color: #263431;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Titel */
+.meetingCard .title {
+    grid-column: 2;
+    grid-row: 1;
+
+    margin: 0;
+    color: #263431;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Kategorier */
+.categoryChip {
+    display: inline-block;
+    margin: 0 8px 0 0;
+
+    color: #73807a;
+    font-size: 13px;
+}
+
+/* Plats */
+.locationDisplay {
+    grid-column: 2;
+    grid-row: 3;
+
+    margin: 0;
+    color: #73807a;
+    font-size: 14px;
+}
+
+/* Lediga platser */
+.remainingSpotsDisplay {
+    grid-column: 3;
+    grid-row: 2;
+
+    margin: 0;
+    color: #73807a;
+    font-size: 13px;
+    text-align: right;
+}

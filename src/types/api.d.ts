@@ -541,6 +541,9 @@ export interface components {
             title?: string | null;
             /** Format: date-time */
             date?: string;
+            location?: string;
+            remainingslots: number;
+            categories: string[];
         };
         CategoryResponse: {
             /** Format: int32 */
@@ -579,7 +582,9 @@ export interface components {
             date?: string;
             /** Format: int32 */
             remainingSlots?: number;
-            participants?: components["schemas"]["MeetingParticipantResponse"][] | null;
+            participants?:
+                | components["schemas"]["MeetingParticipantResponse"][]
+                | null;
             categories?: string[] | null;
             host?: components["schemas"]["UserResponse"];
         };
