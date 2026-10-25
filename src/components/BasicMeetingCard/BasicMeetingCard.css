@@ -13,6 +13,11 @@
     width: 100%;
     box-sizing: border-box;
 }
+.meetingCard:hover {
+    background-color: #f0f2ed;
+    border-color: #73807a;
+    cursor: pointer;
+}
 
 /* Datum */
 .cardDate {
@@ -93,4 +98,39 @@
 
 .timedisplay p {
     margin: 0;
+}
+.attend {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+    padding: 12px 16px;
+    background-color: #263431;
+    color: white;
+    border: 1px solid #263431;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.attend:hover {
+    background-color: #40534c;
+}
+
+.attend:focus-visible {
+    outline: 2px solid #263431;
+    outline-offset: 3px;
+}
+
+/* Avanmäl-knappen */
+.attend.cancel {
+    background-color: transparent;
+    color: #272828;
+    border-color: #ff3a3a;
+}
+
+.attend.cancel:hover {
+    background-color: #ff3a3a;
 }
