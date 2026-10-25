@@ -10,28 +10,14 @@
     background-color: #ffffff;
     border: 1px solid #e0e5df;
     border-radius: 12px;
-
+    width: 100%;
     box-sizing: border-box;
 }
 
 /* Datum */
-.dateDisplay {
+.cardDate {
     grid-column: 1;
     grid-row: 1 / 4;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 72px;
-    min-height: 80px;
-
-    background-color: #f0f2ed;
-    border-radius: 8px;
-
-    color: #263431;
-    font-size: 24px;
-    font-weight: 600;
 }
 
 /* Titel */
@@ -73,4 +59,38 @@
     color: #73807a;
     font-size: 13px;
     text-align: right;
+}
+
+.meetingHeading {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.categoryList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.meetingHeading .title {
+    margin: 0;
+}
+
+.timedisplay {
+    grid-column: 2;
+    grid-row: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 0;
+
+    color: #263431;
+    font-size: 16px;
+}
+
+.timedisplay p {
+    margin: 0;
 }
