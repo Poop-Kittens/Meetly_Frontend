@@ -6,6 +6,7 @@ import { useUser } from "../../context/UserContext";
 import "./Login.css";
 
 import LoginForm from "../../components/LoginForm/LoginForm";
+import MessageBox from "../../components/MessageBox/MessageBox";
 
 function Login() {
   const { setUser } = useUser();
@@ -44,7 +45,7 @@ function Login() {
 
   return (
     <div className="login-page">
-      {error ?? <p>{error}</p>}
+      {error && <MessageBox message={error} messageType="error" />}
       <LoginForm onLogin={handleLogin} onRegister={handleRegister} />
     </div>
   );

@@ -1,0 +1,18 @@
+.msg-box {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid #e0e5df;
+  border-radius: 0.5rem;
+}
+
+.warning {
+  background-color: #ffd900;
+}
+
+.error {
+  background-color: #ff0000c0;
+}
