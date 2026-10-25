@@ -542,7 +542,7 @@ export interface components {
             /** Format: date-time */
             date?: string;
             location?: string;
-            remainingslots: number;
+            remainingSlots: number;
             categories: string[];
         };
         CategoryResponse: {

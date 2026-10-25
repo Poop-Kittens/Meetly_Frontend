@@ -1,33 +1,55 @@
 import "../BasicMeetingCard/BasicMeetingCard.css";
+import CardDate from "../CardDate/CardDate";
 
 interface BasicMeetingCardProps {
+    id: number;
     date: string;
     categories: string[];
     title: string;
     location: string;
     remainingSlots: number;
+    onMeetingClick: (id: number) => void;
 }
 
 function BasicMeetingCard({
+    id,
     date,
     categories,
     title,
     location,
     remainingSlots,
+    onMeetingClick,
 }: BasicMeetingCardProps) {
+    let meetingtime = new Date(date);
     return (
         <div className="meetingCard">
-            <p className="dateDisplay">{date}</p>
+            <CardDate date={date} />
 
-            {categories.map((category) => (
-                <p key={category} className="categoryChip">
-                    {category}
+            <div className="meetingHeading">
+                <h1 className="title">{title}</h1>
+                <div className="categoryList">
+                    {categories.map((category) => (
+                        <span key={category} className="categoryChip">
+                            {category}
+                        </span>
+                    ))}
+                </div>
+            </div>
+            <div className="timedisplay">
+                <p>
+                    {meetingtime.toLocaleTimeString("sv-SE", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    })}
                 </p>
-            ))}
-
-            <h1 className="title">{title}</h1>
+            </div>
             <p className="locationDisplay">{location}</p>
-            <p className="remainingSpotsDisplay">{remainingSlots}</p>
+            <p className="remainingSpotsDisplay">
+                Lediga platser:{remainingSlots}
+            </p>
+            <button className="DetailButton" onClick={() => onMeetingClick(id)}>
+                Show details
+            </button>
         </div>
     );
 }

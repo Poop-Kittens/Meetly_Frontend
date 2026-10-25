@@ -55,12 +55,12 @@ function Home() {
                 setIsLoading(false);
             });
     }, []);
-
+    console.log("Möten från API:", meetings);
     return (
         <div>
-            <h1>Homepage</h1>
             <Navbar activePage="HomePage" />
-            <MeetingList />
+            <h1>Homepage</h1>
+            <MeetingList onMeetingClick={handleMeetingClick} />
             {isLoading && <p>Hämtar möten...</p>}
             {error && <p>{error}</p>}
             {!isLoading && !error && meetings.length === 0 && (

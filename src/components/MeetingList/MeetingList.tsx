@@ -1,10 +1,13 @@
-import { getUpcomingMeetings } from "../../api/Api";
+import { getUpcomingMeetings } from "../../api/api";
 import { useState, useEffect } from "react";
 import type { BasicMeetingResponse } from "../../types/types";
 import BasicMeetingCard from "../BasicMeetingCard/BasicMeetingCard";
 import "../MeetingList/MeetingList.css";
 
-function MeetingList() {
+interface MeetingListProps {
+    onMeetingClick: (id: number) => void;
+}
+function MeetingList({ onMeetingClick }: MeetingListProps) {
     const [meetingList, setMeetingList] = useState<BasicMeetingResponse[]>([]);
     async function getMeetings() {
         let meetings = await getUpcomingMeetings();
@@ -19,11 +22,13 @@ function MeetingList() {
             {meetingList.map((meeting) => (
                 <BasicMeetingCard
                     key={meeting.id}
+                    id={meeting.id}
                     title={meeting.title ?? ""}
                     date={meeting.date}
                     location={meeting.location}
-                    remainingSlots={meeting.remainingslots}
+                    remainingSlots={meeting.remainingSlots}
                     categories={meeting.categories}
+                    onMeetingClick={onMeetingClick}
                 />
             ))}
         </div>
