@@ -1,5 +1,4 @@
 import Navbar from "../../components/Navbar/Navbar";
-import MeetingCard from "../../components/MeetingCard/MeetingCard";
 import { useState, useEffect } from "react";
 import { getUpcomingMeetings, getMeeting } from "../../api/api";
 import { Navigate } from "react-router";
@@ -7,9 +6,11 @@ import { useUser } from "../../context/UserContext";
 import type { BasicMeetingResponse, MeetingResponse } from "../../types/types";
 
 import MeetingList from "../../components/MeetingList/MeetingList";
+import MeetingCard from "../../components/MeetingCard/MeetingCard";
+import MessageBox from "../../components/MessageBox/MessageBox";
 
 function Home() {
-  const { user } = useUser();
+  const { user, loading } = useUser();
 
   //håller koll på om rutan med detaljerna ska visas
   const [isMeetingOpen, setIsMeetingOpen] = useState(false);
@@ -27,7 +28,37 @@ function Home() {
   //sparar felmeddelande om något får fel vid hämtningen
   const [error, setError] = useState<string | null>(null);
 
-  //om användaren inte är inloggad navigeras man till login sidan
+  //körs när Home-komponenten laddas första gången
+  useEffect(() => {
+    //stoppar hämtningen tills programmet vet att det finns en inloggad användare
+    if (loading || !user) {
+      return;
+    }
+
+    //hämtar listan med kommande möten från backend
+    getUpcomingMeetings()
+      .then((data) => {
+        //sparar möteslistan i state
+        setMeetings(data);
+      })
+      .catch((error) => {
+        //fångar fel om möteslistan inte kan hämtas
+        console.error("Kunde inte hämta möten:", error);
+        setError("Kunde inte hämta möten. Försök igen senare.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [user, loading]);
+
+  console.log("Möten från API:", meetings);
+
+  //väntar på att användaren ska laddas in
+  if (loading) {
+    return <MessageBox message="Laddar användare..." messageType="none" />;
+  }
+
+  //navigerar tillbaka till login sidan om det inte finns någon användare
   if (!user) {
     return <Navigate to="/" replace />;
   }
@@ -47,45 +78,19 @@ function Home() {
     }
   };
 
-  //körs när Home-komponenten laddas första gången
-  useEffect(() => {
-    //hämtar listan med kommande möten från backend
-    getUpcomingMeetings()
-      .then((data) => {
-        //sparar möteslistan i state
-        setMeetings(data);
-      })
-      .catch((error) => {
-        //fångar fel om möteslistan inte kan hämtas
-        console.error("Kunde inte hämta möten:", error);
-        setError("Kunde inte hämta möten. Försök igen senare.");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-  console.log("Möten från API:", meetings);
   return (
     <div>
       <Navbar activePage="HomePage" />
       <h1>Homepage</h1>
       <MeetingList onMeetingClick={handleMeetingClick} />
-      {isLoading && <p>Hämtar möten...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && <MessageBox message="Hämtar möten..." messageType="none" />}
+      {error && <MessageBox message={error} messageType="error" />}
       {!isLoading && !error && meetings.length === 0 && (
-        <p>Det finns inga kommande möten just nu.</p>
+        <MessageBox
+          message="Det finns inga kommande möten just nu."
+          messageType="warning"
+        />
       )}
-
-      {/* Tillfällig testknapp som öppnar det första mötet i listan */}
-      <button
-        onClick={() => {
-          if (meetings[0]?.id != null) {
-            handleMeetingClick(meetings[0].id);
-          }
-        }}
-      >
-        Visa första mötet
-      </button>
 
       {isMeetingOpen && selectedMeeting && (
         <MeetingCard
