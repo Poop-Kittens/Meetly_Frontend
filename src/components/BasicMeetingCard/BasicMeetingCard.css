@@ -13,6 +13,11 @@
     width: 100%;
     box-sizing: border-box;
 }
+.meetingCard:hover {
+    background-color: #f0f2ed;
+    border-color: #73807a;
+    cursor: pointer;
+}
 
 /* Datum */
 .cardDate {

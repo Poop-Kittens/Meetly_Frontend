@@ -22,7 +22,7 @@ function BasicMeetingCard({
 }: BasicMeetingCardProps) {
     let meetingtime = new Date(date);
     return (
-        <div className="meetingCard">
+        <div className="meetingCard" onClick={() => onMeetingClick(id)}>
             <CardDate date={date} />
 
             <div className="meetingHeading">
@@ -47,9 +47,6 @@ function BasicMeetingCard({
             <p className="remainingSpotsDisplay">
                 Lediga platser:{remainingSlots}
             </p>
-            <button className="DetailButton" onClick={() => onMeetingClick(id)}>
-                Show details
-            </button>
         </div>
     );
 }
