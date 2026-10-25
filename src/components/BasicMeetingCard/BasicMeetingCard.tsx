@@ -1,5 +1,6 @@
 import "../BasicMeetingCard/BasicMeetingCard.css";
 import CardDate from "../CardDate/CardDate";
+import { signUp } from "../../api/api";
 
 interface BasicMeetingCardProps {
     id: number;
@@ -21,6 +22,7 @@ function BasicMeetingCard({
     onMeetingClick,
 }: BasicMeetingCardProps) {
     let meetingtime = new Date(date);
+
     return (
         <div className="meetingCard" onClick={() => onMeetingClick(id)}>
             <CardDate date={date} />
@@ -47,6 +49,16 @@ function BasicMeetingCard({
             <p className="remainingSpotsDisplay">
                 Lediga platser:{remainingSlots}
             </p>
+            <button
+                className="attend"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    console.log("ANMÄL-KNAPP KLICKAD", id);
+                    signUp(id);
+                }}
+            >
+                Anmäl till möte
+            </button>
         </div>
     );
 }
