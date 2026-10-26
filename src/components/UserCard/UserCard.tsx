@@ -1,5 +1,5 @@
 import type { UserResponse } from "../../types/types";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../hooks/useUser";
 import { logout } from "../../api/api";
 import "./UserCard.css";
 import { useNavigate } from "react-router";
