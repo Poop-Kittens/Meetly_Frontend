@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { register, login, getCurrentUser, ApiError } from "../../api/api";
 import type { LoginRequest, UserRegister } from "../../types/types";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../hooks/useUser";
 import "./Login.css";
 
 import LoginForm from "../../components/LoginForm/LoginForm";

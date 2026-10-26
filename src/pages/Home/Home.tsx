@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useState, useEffect } from "react";
 import { getUpcomingMeetings, getMeeting } from "../../api/api";
 import { Navigate } from "react-router";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../hooks/useUser";
 import type { BasicMeetingResponse, MeetingResponse } from "../../types/types";
 
 import MeetingList from "../../components/MeetingList/MeetingList";

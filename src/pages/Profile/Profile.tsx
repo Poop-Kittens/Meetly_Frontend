@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate } from "react-router";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../hooks/useUser";
 import UserCard from "../../components/UserCard/UserCard";
 import Navbar from "../../components/Navbar/Navbar";
 import MessageBox from "../../components/MessageBox/MessageBox";
