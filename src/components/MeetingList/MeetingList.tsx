@@ -1,49 +1,67 @@
-import { getUpcomingMeetings } from "../../api/api";
 import { useState, useEffect } from "react";
+import { getUpcomingMeetings, getMyMeetings } from "../../api/api";
 import type { BasicMeetingResponse } from "../../types/types";
-import BasicMeetingCard from "../BasicMeetingCard/BasicMeetingCard";
 import "../MeetingList/MeetingList.css";
-import { getMyMeetings } from "../../api/api";
+
+import BasicMeetingCard from "../BasicMeetingCard/BasicMeetingCard";
 
 interface MeetingListProps {
   onMeetingClick: (id: number) => void;
   mine?: "upcoming" | "past"; // utan värde: alla kommande möten.
 }
+
 function MeetingList({ onMeetingClick, mine }: MeetingListProps) {
   const [meetingList, setMeetingList] = useState<BasicMeetingResponse[]>([]);
   const [myMeetingids, setMyMeetingIds] = useState<number[]>([]);
-
-  async function getMeetings() {
-    const meetings = await getUpcomingMeetings();
-    const myMeetings = await getMyMeetings();
-    setMyMeetingIds(myMeetings.map((m) => m.id));
-
-    if (!mine) {
-      setMeetingList(meetings);
-      return;
-    }
-
-    const now = new Date();
-    const time = (m: BasicMeetingResponse) => new Date(m.date).getTime();
-
-    if (mine === "upcoming") {
-      setMeetingList(
-        myMeetings
-          .filter((m) => new Date(m.date) >= now)
-          .sort((a, b) => time(a) - time(b)),
-      );
-    } else {
-      setMeetingList(
-        myMeetings
-          .filter((m) => new Date(m.date) < now)
-          .sort((a, b) => time(b) - time(a)),
-      );
-    }
-  } //en asynkron funktion som används för att kunna använda api-anropet
+  // ändrar key variabeln i BasicMeetingCard som gör att den renderas igen med de nya detaljerna
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
-    getMeetings();
-  }, [mine]); //useeffect kör getmeetings efter att komponenenten meetinglist har renderats.
+    let cancelled = false;
+
+    async function loadMeetings() {
+      const [meetings, myMeetings] = await Promise.all([
+        getUpcomingMeetings(),
+        getMyMeetings(),
+      ]);
+
+      if (cancelled) {
+        return;
+      }
+
+      setMyMeetingIds(myMeetings.map((m) => m.id));
+
+      if (!mine) {
+        setMeetingList(meetings);
+        return;
+      }
+
+      const now = new Date();
+      const time = (m: BasicMeetingResponse) => {
+        return new Date(m.date).getTime();
+      };
+
+      if (mine === "upcoming") {
+        setMeetingList(
+          myMeetings
+            .filter((m) => new Date(m.date) >= now)
+            .sort((a, b) => time(a) - time(b)),
+        );
+      } else {
+        setMeetingList(
+          myMeetings
+            .filter((m) => new Date(m.date) < now)
+            .sort((a, b) => time(b) - time(a)),
+        );
+      }
+    }
+
+    loadMeetings();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [mine, refreshKey]);
 
   console.log(meetingList);
 
@@ -60,7 +78,7 @@ function MeetingList({ onMeetingClick, mine }: MeetingListProps) {
           categories={meeting.categories}
           isAttending={myMeetingids.includes(meeting.id)} //skickar med en bool om användaren är anmäld redan eller ej
           onMeetingClick={onMeetingClick}
-          onAttendanceChange={getMeetings}
+          onAttendanceChange={() => setRefreshKey((k) => k + 1)}
         />
       ))}
     </div>
