@@ -1,0 +1,10 @@
+.meetingList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin-left: 24px;
+    margin-right: 24px;
+    width: 100%;
+    max-width: 920px;
+}

@@ -1,0 +1,27 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 99vw;
+}
+.profilePage {
+  display: flex;
+  width: 85vw;
+}
+.profilePage-left {
+  width: 65vw;
+}
+.profilePage-right {
+  width: 20vw;
+}
+.profile h1 {
+  margin: 1rem;
+}
+.profileMeetings h2 {
+  margin: 1rem 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.profileMeetings {
+  margin: 2rem;
+}
