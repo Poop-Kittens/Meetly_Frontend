@@ -1,30 +1,30 @@
 .cardDate {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 
-    width: 72px;
-    height: 120px;
-    flex-shrink: 0;
+  width: 72px;
+  /* height: 120px; */
+  flex-shrink: 0;
 
-    background-color: #f0f2ed;
-    border-radius: 12px;
+  background-color: #f0f2ed;
+  border-radius: 12px;
 }
 
 .cardDate p {
-    margin: 0;
-    font-size: 12px;
-    line-height: 1.2;
-    color: #73807a;
-    width: 100%;
-    text-align: center;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #73807a;
+  width: 100%;
+  text-align: center;
 }
 
 .cardDate p:nth-child(2) {
-    font-size: 28px;
-    font-weight: 600;
-    color: #263431;
+  font-size: 28px;
+  font-weight: 600;
+  color: #263431;
 }
