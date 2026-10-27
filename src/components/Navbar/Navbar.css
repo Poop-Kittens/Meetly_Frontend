@@ -73,26 +73,47 @@
     font-size: 14px;
     font-weight: 600;
 
-    transition: background-color 0.2s ease,
-                transform 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
 
-.user-link {
+/* Knappen som öppnar användarmenyn */
+.UserMenu {
+    position: relative;
+}
+
+.UserMenuButton {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 16px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
     color: inherit;
-    text-decoration: none;
+    cursor: pointer;
 }
 
 /* Liten effekt när man håller musen över profilen */
-.user-link:hover .NameTag {
+.UserMenuButton:hover .NameTag,
+.UserMenuButton[aria-expanded="true"] .NameTag {
     background-color: #cbded0;
     transform: scale(1.05);
 }
 
+/* Nedfällbar meny med användarkortet */
+.UserMenuPanel {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    z-index: 100;
+    width: 320px;
+    max-width: calc(100vw - 32px);
+}
+
 /* Synlig markering för tangentbordsnavigering */
-.user-link:focus-visible,
+.UserMenuButton:focus-visible,
 .NavButton:focus-visible {
     outline: 2px solid #234b45;
     outline-offset: 4px;

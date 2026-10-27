@@ -6,12 +6,12 @@ import type { MeetingResponse, BasicMeetingResponse } from "../../types/types";
 import { getMeeting } from "../../api/api";
 import "./Profile.css";
 
-import UserCard from "../../components/UserCard/UserCard";
 import Navbar from "../../components/Navbar/Navbar";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import MeetingList from "../../components/MeetingList/MeetingList";
 import MeetingCard from "../../components/MeetingCard/MeetingCard";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
+import Footer from "../../components/Footer/Footer";
 
 function Profile() {
     const { user, loading } = useUser();
@@ -53,22 +53,34 @@ function Profile() {
     };
 
     return (
-        <main className="profile">
+        <div className="profile-page">
             <Navbar activePage="profile" />
-            <div className="profilePage">
-                <section className="profilePage-left">
+
+            <main className="profile-main">
+                <header className="profile-header">
                     <h1>Mina sidor</h1>
                     <p>En liten samling av dina saker och ting</p>
-                    <div className="profileMeetings">
-                        <h2>Kommande meetups:</h2>
+                </header>
+
+                {upcoming.length > 0 ? (
+                    <>
+                        <h2 className="profile-heading">Kommande meetups</h2>
                         <MeetingList
                             meetings={upcoming}
                             myMeetingIds={myMeetingIds}
                             onMeetingClick={handleMeetingClick}
                             onAttendanceChange={refresh}
                         />
+                    </>
+                ) : (
+                    <h2 className="profile-heading">
+                        Du har inga kommande meetups
+                    </h2>
+                )}
 
-                        <h2>Tidigare meetups:</h2>
+                {past.length > 0 && (
+                    <>
+                        <h2 className="profile-heading">Tidigare meetups</h2>
                         <MeetingList
                             meetings={past}
                             myMeetingIds={myMeetingIds}
@@ -76,30 +88,28 @@ function Profile() {
                             onReviewClick={setReviewingId}
                             onAttendanceChange={refresh}
                         />
+                    </>
+                )}
 
-                        {error && (
-                            <MessageBox message={error} messageType="error" />
-                        )}
+                {error && <MessageBox message={error} messageType="error" />}
+            </main>
 
-                        {selectedMeeting && (
-                            <MeetingCard
-                                meeting={selectedMeeting}
-                                onClose={() => setSelectedMeeting(null)}
-                            />
-                        )}
-                    </div>
-                </section>
-                <section className="profilePage-right">
-                    <UserCard user={user} />
-                </section>
-            </div>
+            {selectedMeeting && (
+                <MeetingCard
+                    meeting={selectedMeeting}
+                    onClose={() => setSelectedMeeting(null)}
+                />
+            )}
+
             {reviewingId !== null && (
                 <ReviewForm
                     meetingId={reviewingId}
                     onClose={() => setReviewingId(null)}
                 />
             )}
-        </main>
+
+            <Footer />
+        </div>
     );
 }
 
