@@ -1,14 +1,38 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
 body,
 #root {
-  background-color: #f7f7f3;
-  height: 100%;
+    background-color: var(--background-color);
+    height: 100%;
+}
+
+:root {
+    /* Basic colors, used in most of the application */
+    --background-color: #f7f7f3;
+    --primary-green: #234b45;
+    --secondary-green: #50675d;
+    --dark-green: #263431;
+    --border-normal: #dcdcd4;
+
+    /* Colors for buttons */
+    --hover: #35675c;
+    --cancel: #ff3a3a;
+
+    /* Colors for input borders */
+    --border-input: #b2c1b3;
+    --border-input-focus: #708563;
+
+    /* Colors for the user avatar */
+    --avatar: #e2efe5;
+    --avatar-hover: #cbded0;
+
+    /* Category */
+    --category-chip: #3e6045;
 }

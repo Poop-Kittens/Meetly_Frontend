@@ -5,8 +5,8 @@
     min-height: 76px;
     padding: 0 34px;
 
-    background-color: #ffffff;
-    border-bottom: 1px solid #dce4dc;
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-normal);
     box-sizing: border-box;
     gap: 32px;
 }
@@ -18,7 +18,7 @@
     font-size: 26px;
     font-weight: 700;
     letter-spacing: -1px;
-    color: #234b45;
+    color: var(--primary-green);
 }
 
 /* Tillbaka-länken */
@@ -27,7 +27,7 @@
     align-items: center;
     gap: 8px;
 
-    color: #55715e;
+    color: var(--secondary-green);
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
@@ -37,7 +37,7 @@
 }
 
 .NavButton:hover {
-    color: #234b45;
+    color: var(--primary-green);
 }
 
 /* Användarens namn och profil */
@@ -51,7 +51,7 @@
     margin: 0;
     font-size: 15px;
     font-weight: 500;
-    color: #234b45;
+    color: var(--primary-green);
     white-space: nowrap;
 }
 
@@ -66,10 +66,10 @@
     margin: 0;
 
     border-radius: 50%;
-    background-color: #e2efe5;
-    border: 1px solid #b2c1b3;
+    background-color: var(--avatar);
+    border: 1px solid var(--border-input);
 
-    color: #234b45;
+    color: var(--primary-green);
     font-size: 14px;
     font-weight: 600;
 
@@ -98,7 +98,7 @@
 /* Liten effekt när man håller musen över profilen */
 .UserMenuButton:hover .NameTag,
 .UserMenuButton[aria-expanded="true"] .NameTag {
-    background-color: #cbded0;
+    background-color: var(--avatar-hover);
     transform: scale(1.05);
 }
 
@@ -115,7 +115,7 @@
 /* Synlig markering för tangentbordsnavigering */
 .UserMenuButton:focus-visible,
 .NavButton:focus-visible {
-    outline: 2px solid #234b45;
+    outline: 2px solid var(--primary-green);
     outline-offset: 4px;
     border-radius: 4px;
 }
