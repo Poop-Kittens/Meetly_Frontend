@@ -8,7 +8,6 @@
     max-width: 1000px;
     margin-bottom: 1rem;
     padding: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 14px;
 }
 
@@ -24,10 +23,10 @@
 .search-form select {
     height: 40px;
     padding: 0 1rem;
-    border: 1px solid #b2c1b3;
+    border: 1px solid var(--border-input);
     border-radius: 8px;
-    background-color: #ffffff;
-    color: #234b45;
+    background-color: #fff;
+    color: var(--primary-green);
     width: 100%;
     min-width: 0;
     font-family: inherit;
@@ -37,7 +36,7 @@
 
 .search-form input:focus,
 .search-form select:focus {
-    outline: 2px solid #708563;
+    outline: 2px solid var(--border-input-focus);
     outline-offset: 1px;
 }
 
@@ -45,10 +44,10 @@
     grid-column: 3;
     grid-row: 1;
     padding: 12px 16px;
-    background-color: #263431;
+    background-color: var(--primary-green);
     color: white;
-    border: 1px solid #263431;
-    border-radius: 4px;
+    border: none;
+    border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -57,14 +56,13 @@
 }
 
 .search-form .clear-btn:hover {
-    background-color: #35675c;
-    transform: translateY(-2px);
+    background-color: var(--hover);
 }
 
 .search-form input[type="date"] {
     font-family: inherit;
     font-size: 14px;
-    color: #234b45;
+    color: var(--primary-green);
     cursor: pointer;
     min-width: 0;
 }

@@ -6,7 +6,7 @@
     width: 100%;
     margin: 0; /* positioning is handled by the page layout */
     padding: 1.25rem;
-    border: 1px solid #dcdcd4;
+    border: 1px solid var(--border-normal);
     border-radius: 12px;
     background: #fff;
     box-shadow: 0 2px 10px rgba(35, 75, 69, 0.1);
@@ -29,9 +29,9 @@
     place-items: center;
     font-size: 1.75rem;
     font-weight: 600;
-    color: #234b45;
-    background: #e4ece8;
-    border: 1px solid #cfdcd5;
+    color: var(--primary-green);
+    background: var(--avatar);
+    border: 1px solid var(--border-input);
 }
 
 .user-card__info {
@@ -41,13 +41,13 @@
 .user-card__name {
     margin: 0;
     font-size: 1.1rem;
-    color: #234b45;
+    color: var(--primary-green);
     overflow-wrap: anywhere;
 }
 
 .user-card__email {
     margin: 0.25rem 0 0;
-    color: #50675d;
+    color: var(--secondary-green);
     font-size: 0.9rem;
     overflow-wrap: anywhere;
 }
@@ -56,7 +56,7 @@
     width: 100%;
     margin: 0;
     border: 0;
-    border-top: 1px solid #dcdcd4;
+    border-top: 1px solid var(--border-normal);
 }
 
 .card-bottom {
@@ -69,7 +69,7 @@
 
 .card-bottom p {
     margin: 0;
-    color: #50675d;
+    color: var(--secondary-green);
     font-size: 0.9rem;
 }
 
@@ -77,10 +77,10 @@
 .profile-btn {
     padding: 10px;
     width: 100%;
-    border: 1px solid #234b45;
-    border-radius: 5px;
+    border: 1px solid var(--primary-green);
+    border-radius: 8px;
     background-color: transparent;
-    color: #234b45;
+    color: var(--primary-green);
     font-weight: 600;
     font-size: 15px;
     cursor: pointer;
@@ -88,7 +88,7 @@
 
 .logout-btn:hover,
 .profile-btn:hover {
-    background-color: #234b45;
+    background-color: var(--primary-green);
     color: #fff;
 }
 
