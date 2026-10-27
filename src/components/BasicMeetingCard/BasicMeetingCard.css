@@ -12,10 +12,17 @@
     border-radius: 12px;
     width: 100%;
     box-sizing: border-box;
+    transition: background-color 0.2s ease,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            transform 0.2s ease;
 }
+
 .meetingCard:hover {
-    background-color: #f0f2ed;
-    border-color: #73807a;
+    background-color: #ffffff;
+    border-color: #b2c1b3;
+    box-shadow: 0 6px 20px rgba(35, 75, 69, 0.10);
+    transform: translateY(-3px);
     cursor: pointer;
 }
 
@@ -64,7 +71,7 @@
     grid-column: 3;
     grid-row: 2;
 
-    margin: 0;
+    margin: 12px 0 0;
     color: #73807a;
     font-size: 13px;
     text-align: right;

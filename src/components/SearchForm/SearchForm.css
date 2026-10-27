@@ -28,6 +28,11 @@
     border-radius: 8px;
     background-color: #ffffff;
     color: #234b45;
+    width: 100%;
+    min-width: 0;
+    font-family: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
 .search-form input:focus,
@@ -37,18 +42,8 @@
 }
 
 .search-form .clear-btn {
-    /* background-color: #234b45;
-    color: #ffffff;
-    padding: 0 1rem;
-    height: 40px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.2s, transform 0.2s; */
     grid-column: 3;
     grid-row: 1;
-    /* align-self: center; */
     padding: 12px 16px;
     background-color: #263431;
     color: white;
@@ -64,4 +59,17 @@
 .search-form .clear-btn:hover {
     background-color: #35675c;
     transform: translateY(-2px);
+}
+
+.search-form input[type="date"] {
+    font-family: inherit;
+    font-size: 14px;
+    color: #234b45;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.search-form input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.7;
 }

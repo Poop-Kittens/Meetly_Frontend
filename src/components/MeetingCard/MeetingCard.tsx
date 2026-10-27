@@ -11,39 +11,60 @@ type MeetingCardProps = {
 //tar emot mötesinfon och funktionen för att stänga rutan
 function MeetingCard({ meeting, onClose }: MeetingCardProps) {
     return (
-      <div className="meeting-overlay" onClick={onClose}>
-        <div
-            className="meeting-card"
-            onClick={(e) => e.stopPropagation()}
-        >
-            <button
-                type="button"
-                className="meeting-close"
-                onClick={onClose}
-                aria-label="Stäng mötesdetaljer"
-            >
-                ✕
-            </button>
+        <div className="meeting-overlay" onClick={onClose}>
+            <div className="meeting-card" onClick={(e) => e.stopPropagation()}>
+                <div className="meeting-modal-header">
+                    <h3>{meeting.title}</h3>
 
-            <h3>{meeting.title}</h3>
-            <p>
-                {meeting.date
-                    ? new Date(meeting.date).toLocaleString("sv-SE", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                      })
-                    : "Datum saknas"}
-            </p>
-            <p>{meeting.description}</p>
-            <p>📍{meeting.location}</p>
-            <p>👥Lediga platser: {meeting.remainingSlots}</p>
-            <p>👤Arrangör: {meeting.host?.userName}</p>
-            <p> ---------------------------------------- </p>
-            <p>Kategorier: {meeting.categories?.join(", ")}</p>
-        </div>
+                    <button
+                        type="button"
+                        className="meeting-close"
+                        onClick={onClose}
+                        aria-label="Stäng mötesdetaljer"
+                    >
+                        ✕
+                    </button>
+                </div>
+                <div className="meeting-details-layout">
+                    <div className="meeting-information">
+                        <h4>Om meetupen</h4>
+                        <p>
+                            📅{" "}
+                            {meeting.date
+                                ? new Date(meeting.date).toLocaleString(
+                                      "sv-SE",
+                                      {
+                                          year: "numeric",
+                                          month: "long",
+                                          day: "numeric",
+                                          hour: "2-digit",
+                                          minute: "2-digit",
+                                      },
+                                  )
+                                : "Datum saknas"}
+                        </p>
+
+                        <p>📍 {meeting.location}</p>
+                        <p>👥 Lediga platser: {meeting.remainingSlots}</p>
+                        <p>👤 Arrangör: {meeting.host?.userName}</p>
+
+                        <p className="meeting-description">
+                            {meeting.description}
+                        </p>
+                        <div className="meeting-categories">
+                            {meeting.categories?.map((category) => (
+                                <span className="categoryChip" key={category}>
+                                    {category}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="meeting-reviews">
+                        <h4>Recensioner</h4>
+                        <p>Här kommer recensionerna att visas.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
