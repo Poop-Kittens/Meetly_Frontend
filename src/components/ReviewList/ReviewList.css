@@ -8,6 +8,13 @@
     overflow: auto;
 }
 
+.review-list-item {
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-normal);
+    border-radius: 8px;
+}
+
 .review-list-item p {
     margin: 0.25rem 0 0;
     color: #555;

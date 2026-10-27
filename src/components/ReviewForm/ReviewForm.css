@@ -1,62 +1,192 @@
-.review-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: white;
-    width: 50vw;
-    height: 50vh;
-}
-.review-form h3 {
-    font-size: 2rem;
-}
-
-.review-form textarea {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    min-height: 100px;
-    resize: vertical;
-    font-family: inherit;
-    font-size: 1rem;
-}
-
-.review-form select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.review-form button {
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(53, 89, 136);
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.review-form button:hover {
-    background-color: rgb(66, 114, 172);
-}
-
+/* Mörk bakgrund bakom formuläret (samma som MeetingCard) */
 .review-overlay {
     position: fixed;
     inset: 0;
-    display: grid;
-    place-items: center;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 100;
+    background-color: rgba(20, 40, 35, 0.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    /* Högre än MeetingCard (1000) så formuläret hamnar ovanpå mötesrutan */
+    z-index: 1100;
 }
 
+/* Själva formulär-fönstret */
+.review-form {
+    background-color: #fff;
+    border-radius: 16px;
+
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    box-shadow: 0 12px 40px rgba(20, 40, 35, 0.15);
+
+    color: var(--primary-green);
+    animation: reviewFadeIn 0.2s ease-out;
+}
+
+@keyframes reviewFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Grön rubrikrad med stängknapp */
+.review-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--primary-green);
+    padding: 24px 32px;
+    border-radius: 16px 16px 0 0;
+}
+
+.review-modal-header h3 {
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 650;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.review-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 32px;
+    height: 32px;
+
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+
+    border: none;
+    border-radius: 50%;
+
+    font-size: 18px;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.review-close:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.review-close:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+/* Innehållet under rubrikraden */
+.review-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px;
+}
+
+.review-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.review-field label {
+    color: var(--primary-green);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.review-form textarea,
+.review-form select {
+    background-color: var(--background-color);
+    color: var(--primary-green);
+    border: 1px solid var(--border-normal);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.review-form textarea {
+    padding: 14px 16px;
+    min-height: 140px;
+    resize: vertical;
+}
+
+.review-form select {
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+.review-form textarea:focus-visible,
+.review-form select:focus-visible {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 2px;
+}
+
+.review-error {
+    color: var(--cancel);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Knappar */
 .review-actions {
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-normal);
+}
+
+.review-form .review-actions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-green);
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.review-form .review-actions button:hover {
+    background-color: var(--hover);
+}
+
+.review-form .review-actions button:focus-visible {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 3px;
+}
+
+/* Avbryt-knappen får en lugnare stil */
+.review-form .review-actions .review-cancel {
+    background-color: var(--avatar);
+    color: var(--primary-green);
+}
+
+.review-form .review-actions .review-cancel:hover {
+    background-color: var(--avatar-hover);
+}
+
+@media (max-width: 480px) {
+    .review-modal-header,
+    .review-body {
+        padding: 20px;
+    }
 }
