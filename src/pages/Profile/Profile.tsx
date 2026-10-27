@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import MeetingList from "../../components/MeetingList/MeetingList";
 import MeetingCard from "../../components/MeetingCard/MeetingCard";
+import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import type { MeetingResponse } from "../../types/types";
 import { getMeeting } from "../../api/api";
 import "./Profile.css";
@@ -15,6 +16,7 @@ function Profile() {
     const [selectedMeeting, setSelectedMeeting] =
         useState<MeetingResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [reviewingId, setReviewingId] = useState<number | null>(null);
 
     if (loading) {
         return <MessageBox message="Laddar användare..." messageType="none" />;
@@ -49,10 +51,11 @@ function Profile() {
                             onMeetingClick={handleMeetingClick}
                         />
 
-                        <h2>Tidigare meetups:</h2>
+                        <h2>Previous:</h2>
                         <MeetingList
                             mine="past"
                             onMeetingClick={handleMeetingClick}
+                            onReviewClick={setReviewingId}
                         />
 
                         {error && (
@@ -71,6 +74,12 @@ function Profile() {
                     <UserCard user={user} />
                 </section>
             </div>
+            {reviewingId !== null && (
+                <ReviewForm
+                    meetingId={reviewingId}
+                    onClose={() => setReviewingId(null)}
+                />
+            )}
         </main>
     );
 }
