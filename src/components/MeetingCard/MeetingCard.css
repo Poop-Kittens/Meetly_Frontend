@@ -20,15 +20,17 @@
     border: 1px solid #dce4dc;
     border-radius: 16px;
 
-    padding: 32px;
+    padding: 0px;
     width: 100%;
-    max-width: 460px;
+    max-width: 900px;
     max-height: 90vh;
     overflow-y: auto;
 
     box-shadow: 0 12px 40px rgba(20, 40, 35, 0.15);
 
     color: #263431;
+    position: relative;
+    animation: meetingFadeIn 0.2s ease-out;
 }
 
 /* Rubriken i popupen */
@@ -40,13 +42,13 @@
 
 /* Texten i popupen */
 .meeting-card p {
-    line-height: 1.6;
-    margin-bottom: 8px;
+    color: #50675d;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 12px;
 }
 
-.meeting-card {
-    position: relative;
-}
+
 
 .meeting-close {
     position: absolute;
@@ -84,7 +86,124 @@
 /* Ger rubriken plats så att den inte hamnar under X-knappen */
 .meeting-card h3 {
     color: #234b45;
-    font-size: 1.5rem;
-    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 650;
+    line-height: 1.3;
+
+    margin-bottom: 20px;
     padding-right: 35px;
+}
+
+@keyframes meetingFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.meeting-details-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+.meeting-information {
+    min-width: 0;
+}
+
+.meeting-description {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #dce4dc;
+}
+
+.meeting-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.meeting-categories .categoryChip {
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: #e2efe5;
+    color: #3e6045;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.meeting-reviews {
+    background-color: #f7f7f3;
+    border: 1px solid #dce4dc;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.meeting-reviews h4 {
+    color: #234b45;
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.meeting-reviews p {
+    color: #73807a;
+}
+
+.meeting-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #234b45;
+    padding: 24px 32px;
+    border-radius: 16px 16px 0 0;
+}
+
+.meeting-modal-header h3 {
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.meeting-modal-header .meeting-close {
+    position: static;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.meeting-modal-header .meeting-close:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.meeting-details-layout {
+    padding: 32px;
+    margin-top: 0;
+}
+
+.meeting-information h4 {
+    color: #234b45;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 20px;
+}
+
+.meeting-information > p:not(.meeting-description) {
+    padding: 8px 0;
+    margin: 0;
+    border-bottom: 1px solid #edf0eb;
+}
+
+.meeting-information .meeting-description {
+    color: #263431;
+    font-size: 15px;
+    line-height: 1.7;
 }

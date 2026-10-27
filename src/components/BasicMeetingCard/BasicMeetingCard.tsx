@@ -56,7 +56,7 @@ function BasicMeetingCard({
             <p className="locationDisplay">{location}</p>
             {!isPrevious && (
                 <p className="remainingSpotsDisplay">
-                    Lediga platser:{remainingSlots}
+                    Lediga platser: {remainingSlots}
                 </p>
             )}
 
