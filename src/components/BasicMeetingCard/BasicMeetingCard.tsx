@@ -27,7 +27,7 @@ function BasicMeetingCard({
     onAttendanceChange,
     onReviewClick,
 }: BasicMeetingCardProps) {
-    const meetingtime = new Date(date).toLocaleDateString("sv-SE", {
+    const meetingtime = new Date(date).toLocaleTimeString("sv-SE", {
         hour: "2-digit",
         minute: "2-digit",
     });
@@ -74,6 +74,7 @@ function BasicMeetingCard({
                 )
             ) : !isAttending ? (
                 <button
+                    disabled={remainingSlots <= 0}
                     className="attend"
                     onClick={async (e) => {
                         e.stopPropagation();

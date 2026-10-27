@@ -139,3 +139,8 @@
     background: #ebeae5;
     color: #777;
 }
+
+.attend:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
