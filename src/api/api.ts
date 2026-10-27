@@ -114,7 +114,7 @@ export const cancelRegistration = (meetingId: number) =>
   request<void>(`/api/meeting/${meetingId}/registration`, { method: "DELETE" });
 
 export const reviewMeeting = (meetingId: number, data: MeetingReviewRequest) =>
-  request<MeetingParticipantResponse>(
-    `/api/meeting/${meetingId}/review${toQuery(data)}`,
-    { method: "PUT" },
-  );
+  request<MeetingParticipantResponse>(`/api/meeting/${meetingId}/review`, {
+    method: "PUT",
+    body: json(data),
+  });

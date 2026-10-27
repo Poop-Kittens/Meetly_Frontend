@@ -115,7 +115,7 @@ function Home() {
   return (
     <div>
       <Navbar activePage="HomePage" />
-      <h1>Homepage</h1>
+      <h1>Kommande Meetups</h1>
       <SearchForm onSearch={handleMeetingSearch} />
       {!isLoading && !error && meetings.length === 0 && (
         <MessageBox
