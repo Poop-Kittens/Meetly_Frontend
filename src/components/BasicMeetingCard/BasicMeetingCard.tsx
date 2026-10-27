@@ -1,6 +1,7 @@
 import "../BasicMeetingCard/BasicMeetingCard.css";
 import CardDate from "../CardDate/CardDate";
 import { signUp, cancelRegistration } from "../../api/api";
+import type { MouseEvent } from "react";
 
 interface BasicMeetingCardProps {
     id: number;
@@ -34,6 +35,30 @@ function BasicMeetingCard({
 
     const isPrevious = new Date(date) < new Date(); //Mötet klart när datum passerat.
 
+    const runAndRefresh = async (action: () => Promise<unknown>) => {
+        try {
+            await action();
+            onAttendanceChange();
+        } catch (error) {
+            console.error("Något gick fel", error);
+        }
+    };
+
+    const handleAttend = (e: MouseEvent) => {
+        e.stopPropagation();
+        runAndRefresh(() => signUp(id));
+    };
+
+    const handleCancel = (e: MouseEvent) => {
+        e.stopPropagation();
+        runAndRefresh(() => cancelRegistration(id));
+    };
+
+    const handleReview = (e: MouseEvent) => {
+        e.stopPropagation();
+        onReviewClick?.(id);
+    };
+
     return (
         <div
             className={`meetingCard ${isPrevious ? "meetingCard-previous" : ""}`}
@@ -62,46 +87,21 @@ function BasicMeetingCard({
 
             {isPrevious ? (
                 isAttending && (
-                    <button
-                        className="attend review"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            onReviewClick?.(id);
-                        }}
-                    >
+                    <button className="attend review" onClick={handleReview}>
                         Recensera
                     </button>
                 )
-            ) : !isAttending ? (
-                <button
-                    disabled={remainingSlots <= 0}
-                    className="attend"
-                    onClick={async (e) => {
-                        e.stopPropagation();
-                        try {
-                            await signUp(id);
-                            onAttendanceChange();
-                        } catch (error) {
-                            console.log("Något gick fel", error);
-                        }
-                    }}
-                >
-                    Anmäl till möte
+            ) : isAttending ? (
+                <button className="attend cancel" onClick={handleCancel}>
+                    Avanmäl
                 </button>
             ) : (
                 <button
-                    className="attend cancel"
-                    onClick={async (e) => {
-                        e.stopPropagation();
-                        try {
-                            await cancelRegistration(id);
-                            onAttendanceChange();
-                        } catch (error) {
-                            console.log("något gick fel", error);
-                        }
-                    }}
+                    disabled={remainingSlots <= 0}
+                    className="attend"
+                    onClick={handleAttend}
                 >
-                    Avanmäl
+                    Anmäl till möte
                 </button>
             )}
         </div>
