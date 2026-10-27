@@ -1,138 +1,138 @@
 .meetingCard {
-    display: grid;
-    grid-template-columns: 72px 1fr auto;
-    grid-template-rows: auto auto auto;
-    column-gap: 20px;
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  grid-template-rows: auto auto auto;
+  column-gap: 20px;
 
-    min-height: 128px;
-    padding: 24px;
+  min-height: 128px;
+  padding: 24px;
 
-    background-color: #ffffff;
-    border: 1px solid #e0e5df;
-    border-radius: 12px;
-    width: 100%;
-    box-sizing: border-box;
+  background-color: #ffffff;
+  border: 1px solid #e0e5df;
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .meetingCard:hover {
-    background-color: #f0f2ed;
-    border-color: #73807a;
-    cursor: pointer;
+  background-color: #f0f2ed;
+  border-color: #73807a;
+  cursor: pointer;
 }
 
 /* Datum */
 .cardDate {
-    grid-column: 1;
-    grid-row: 1 / 4;
+  grid-column: 1;
+  grid-row: 1 / 4;
 }
 
 /* Titel */
 .meetingCard .title {
-    grid-column: 2;
-    grid-row: 1;
+  grid-column: 2;
+  grid-row: 1;
 
-    margin: 0;
-    color: #263431;
-    font-size: 20px;
-    font-weight: 600;
+  margin: 0;
+  color: #263431;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 /* Kategorier */
 .categoryChip {
-    display: inline-block;
-    margin: 0 8px 0 0;
+  display: inline-block;
+  margin: 0 8px 0 0;
 
-    color: #73807a;
-    font-size: 13px;
+  color: #73807a;
+  font-size: 13px;
 }
 
 /* Plats */
 .locationDisplay {
-    grid-column: 2;
-    grid-row: 3;
+  grid-column: 2;
+  grid-row: 3;
 
-    margin: 0;
-    color: #73807a;
-    font-size: 14px;
+  margin: 0;
+  color: #73807a;
+  font-size: 14px;
 }
 
 /* Lediga platser */
 .remainingSpotsDisplay {
-    grid-column: 3;
-    grid-row: 2;
+  grid-column: 3;
+  grid-row: 2;
 
-    margin: 0;
-    color: #73807a;
-    font-size: 13px;
-    text-align: right;
+  margin: 0;
+  color: #73807a;
+  font-size: 13px;
+  text-align: right;
 }
 
 .meetingHeading {
-    grid-column: 2;
-    grid-row: 1;
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
 }
 
 .categoryList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .meetingHeading .title {
-    margin: 0;
+  margin: 0;
 }
 
 .timedisplay {
-    grid-column: 2;
-    grid-row: 2;
+  grid-column: 2;
+  grid-row: 2;
 
-    display: flex;
-    align-items: center;
-    gap: 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
 
-    color: #263431;
-    font-size: 16px;
+  color: #263431;
+  font-size: 16px;
 }
 
 .timedisplay p {
-    margin: 0;
+  margin: 0;
 }
 .attend {
-    grid-column: 3;
-    grid-row: 1;
-    align-self: center;
-    padding: 12px 16px;
-    background-color: #263431;
-    color: white;
-    border: 1px solid #263431;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.2s ease;
+  grid-column: 3;
+  grid-row: 1;
+  align-self: center;
+  padding: 12px 16px;
+  background-color: #263431;
+  color: white;
+  border: 1px solid #263431;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
 }
 
 .attend:hover {
-    background-color: #40534c;
+  background-color: #40534c;
 }
 
 .attend:focus-visible {
-    outline: 2px solid #263431;
-    outline-offset: 3px;
+  outline: 2px solid #263431;
+  outline-offset: 3px;
 }
 
 /* Avanmäl-knappen */
 .attend.cancel {
-    background-color: transparent;
-    color: #272828;
-    border-color: #ff3a3a;
+  background-color: transparent;
+  color: #272828;
+  border-color: #ff3a3a;
 }
 
 .attend.cancel:hover {
-    background-color: #ff3a3a;
+  background-color: #ff3a3a;
 }
 .attend:disabled {
     background-color: #e5e5e5;

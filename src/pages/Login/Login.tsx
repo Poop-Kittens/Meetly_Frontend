@@ -1,17 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { register, login, getCurrentUser, ApiError } from "../../api/api";
 import type { LoginRequest, UserRegister } from "../../types/types";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../hooks/useUser";
 import "./Login.css";
 
 import LoginForm from "../../components/LoginForm/LoginForm";
 import MessageBox from "../../components/MessageBox/MessageBox";
 
 function Login() {
-  const { setUser } = useUser();
+  const { user, loading, setUser } = useUser();
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+
+  if (loading) {
+    return <MessageBox message="Laddar användare..." messageType="none" />;
+  }
+
+  // om användaren redan är inloggad ska de inte kunna vara på login sidan
+  if (user) {
+    return <Navigate to="/home" replace />;
+  }
 
   const logInAndEnter = async (request: LoginRequest) => {
     await login(request); // sets the cookie

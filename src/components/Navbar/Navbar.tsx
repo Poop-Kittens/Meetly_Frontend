@@ -1,5 +1,5 @@
 import "../Navbar/Navbar.css";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../hooks/useUser";
 import { Link } from "react-router";
 
 interface NavbarProps {
@@ -9,7 +9,7 @@ interface NavbarProps {
 function Navbar({ activePage }: NavbarProps) {
     const { user } = useUser();
 
-    let username = user?.userName ?? "";
+    const username = user?.userName ?? "";
     const userTag = username
         .trim()
         .split(/\s+/)
@@ -22,7 +22,7 @@ function Navbar({ activePage }: NavbarProps) {
             <h2>Meetly</h2>
             {activePage != "HomePage" && (
                 <Link className="NavButton" to="/home">
-                    Go back
+                    Tillbaka
                 </Link>
             )}
             <div className="UserNameSection">

@@ -26,7 +26,10 @@ function BasicMeetingCard({
     isAttending,
     onAttendanceChange,
 }: BasicMeetingCardProps) {
-    let meetingtime = new Date(date);
+    const meetingtime = new Date(date).toLocaleTimeString("sv-SE", {
+        hour: "2-digit",
+        minute: "2-digit",
+    });
 
     return (
         <div className="meetingCard" onClick={() => onMeetingClick(id)}>
@@ -42,12 +45,7 @@ function BasicMeetingCard({
                 </div>
             </div>
             <div className="timedisplay">
-                <p>
-                    {meetingtime.toLocaleTimeString("sv-SE", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                    })}
-                </p>
+                <p>{meetingtime}</p>
             </div>
             <p className="locationDisplay">{location}</p>
             <p className="remainingSpotsDisplay">

@@ -12,7 +12,7 @@ import type {
   UserResponse,
 } from "../types/types";
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? "https://localhost:7203";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 // Ett eget felobjekt som förutom meddelandet också bär med sig statuskoden,
 // Används tex i login och profile: e instanceof ApiError ? e.message : ...
