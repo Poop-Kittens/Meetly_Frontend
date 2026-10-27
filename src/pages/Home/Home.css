@@ -11,21 +11,16 @@
     background-color: #f7f7f3;
 }
 
-/* .home-hero {
-    background-color: #e4eee5;
-    padding: 40px 24px;
-    text-align: center;
-} */
-
 .home-hero {
     min-height: 400px;
-    
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* padding: 30px, 24px; */
     background-image: url("../../assets/header.png");
     background-size: cover;
     background-position: center 35%;
     background-repeat: no-repeat;
-
-    
     
 }
 

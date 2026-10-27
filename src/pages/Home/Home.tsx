@@ -1,18 +1,31 @@
 import Navbar from "../../components/Navbar/Navbar";
 import { useState, useEffect } from "react";
-import { getUpcomingMeetings, getMeeting } from "../../api/api";
+import { getUpcomingMeetings, searchMeetings, getMeeting } from "../../api/api";
 import { Navigate } from "react-router";
 import { useUser } from "../../hooks/useUser";
-import type { BasicMeetingResponse, MeetingResponse } from "../../types/types";
-import Footer from "../../components/Footer/Footer";
+import { useMyMeetings } from "../../hooks/useMyMeetings";
+import type {
+    BasicMeetingResponse,
+    MeetingResponse,
+    MeetingSearchRequest,
+} from "../../types/types";
+import "./Home.css";
+
+import SearchForm from "../../components/SearchForm/SearchForm";
 import MeetingList from "../../components/MeetingList/MeetingList";
 import MeetingCard from "../../components/MeetingCard/MeetingCard";
 import MessageBox from "../../components/MessageBox/MessageBox";
+import Footer from "../../components/Footer/Footer";
 
-import "./Home.css";
+const isEmptyRequest = (request: MeetingSearchRequest) =>
+    Object.values(request).every((value) => !value || value.trim() === "");
 
 function Home() {
     const { user, loading } = useUser();
+    const { myMeetings, refresh: refreshMyMeetings } = useMyMeetings(); // above the early returns
+    const [lastRequest, setLastRequest] = useState<MeetingSearchRequest | null>(
+        null,
+    );
 
     //håller koll på om rutan med detaljerna ska visas
     const [isMeetingOpen, setIsMeetingOpen] = useState(false);
@@ -65,6 +78,23 @@ function Home() {
         return <Navigate to="/" replace />;
     }
 
+    const handleMeetingSearch = async (request: MeetingSearchRequest) => {
+        try {
+            setError(null);
+
+            if (isEmptyRequest(request)) {
+                setLastRequest(null);
+                setMeetings(await getUpcomingMeetings());
+            } else {
+                setLastRequest(request);
+                setMeetings(await searchMeetings(request));
+            }
+        } catch (error) {
+            console.error("Sökningen misslyckades:", error);
+            setError("Sökningen misslyckades");
+        }
+    };
+
     //hanterar detaljerna för det möte användaren klickar på
     const handleMeetingClick = async (id: number) => {
         try {
@@ -80,14 +110,29 @@ function Home() {
         }
     };
 
+    const handleAttendanceChange = async () => {
+        try {
+            const [updated] = await Promise.all([
+                lastRequest
+                    ? searchMeetings(lastRequest)
+                    : getUpcomingMeetings(),
+                refreshMyMeetings(),
+            ]);
+            setMeetings(updated);
+        } catch (error) {
+            console.error("Kunde inte uppdatera listan:", error);
+            setError("Kunde inte uppdatera listan.");
+        }
+    };
+
     return (
         <div className="home-page">
             <Navbar activePage="HomePage" />
             <section className="home-hero">
-            
-        </section>
-        <h2 className="home-heading">Kommande meetups</h2>
-            <MeetingList onMeetingClick={handleMeetingClick} />
+                <SearchForm onSearch={handleMeetingSearch} />
+            </section>
+
+            <h2 className="home-heading">Kommande meetups</h2>
             {isLoading && (
                 <MessageBox message="Hämtar möten..." messageType="none" />
             )}
@@ -98,6 +143,12 @@ function Home() {
                     messageType="warning"
                 />
             )}
+            <MeetingList
+                meetings={meetings}
+                myMeetingIds={myMeetings.map((m) => m.id)}
+                onMeetingClick={handleMeetingClick}
+                onAttendanceChange={handleAttendanceChange}
+            />
 
             {isMeetingOpen && selectedMeeting && (
                 <MeetingCard

@@ -36,28 +36,6 @@
     font-weight: 600;
 }
 
-/* Kategorier */
-/* .categoryChip {
-    display: inline-block;
-    margin: 0 8px 0 0;
-
-    color: #73807a;
-    font-size: 13px;
-} */
-
-/* .categoryChip {
-    display: inline-block;
-    padding: 5px 12px;
-    margin: 0;
-
-    background-color: #e2efe5;
-    color: #326547;
-
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-} */
-
 .categoryChip {
     display: inline-block;
     padding: 5px 12px;
