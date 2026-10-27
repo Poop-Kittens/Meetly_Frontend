@@ -134,3 +134,8 @@
 .attend.cancel:hover {
   background-color: #ff3a3a;
 }
+
+.meetingCard-previous {
+  background: #ebeae5;
+  color: #777;
+}

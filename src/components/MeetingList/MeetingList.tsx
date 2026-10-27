@@ -7,10 +7,15 @@ import BasicMeetingCard from "../BasicMeetingCard/BasicMeetingCard";
 
 interface MeetingListProps {
   onMeetingClick: (id: number) => void;
+  onReviewClick?: (id: number) => void;
   mine?: "upcoming" | "past"; // utan värde: alla kommande möten.
 }
 
-function MeetingList({ onMeetingClick, mine }: MeetingListProps) {
+function MeetingList({
+  onMeetingClick,
+  onReviewClick,
+  mine,
+}: MeetingListProps) {
   const [meetingList, setMeetingList] = useState<BasicMeetingResponse[]>([]);
   const [myMeetingids, setMyMeetingIds] = useState<number[]>([]);
   // ändrar key variabeln i BasicMeetingCard som gör att den renderas igen med de nya detaljerna
@@ -79,6 +84,7 @@ function MeetingList({ onMeetingClick, mine }: MeetingListProps) {
           isAttending={myMeetingids.includes(meeting.id)} //skickar med en bool om användaren är anmäld redan eller ej
           onMeetingClick={onMeetingClick}
           onAttendanceChange={() => setRefreshKey((k) => k + 1)}
+          onReviewClick={onReviewClick}
         />
       ))}
     </div>
