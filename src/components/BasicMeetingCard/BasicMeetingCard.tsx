@@ -1,7 +1,6 @@
 import "../BasicMeetingCard/BasicMeetingCard.css";
 import CardDate from "../CardDate/CardDate";
 import { signUp } from "../../api/api";
-import { useState } from "react";
 import { cancelRegistration } from "../../api/api";
 
 interface BasicMeetingCardProps {
