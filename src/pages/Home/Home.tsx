@@ -4,10 +4,12 @@ import { getUpcomingMeetings, getMeeting } from "../../api/api";
 import { Navigate } from "react-router";
 import { useUser } from "../../hooks/useUser";
 import type { BasicMeetingResponse, MeetingResponse } from "../../types/types";
-
+import Footer from "../../components/Footer/Footer";
 import MeetingList from "../../components/MeetingList/MeetingList";
 import MeetingCard from "../../components/MeetingCard/MeetingCard";
 import MessageBox from "../../components/MessageBox/MessageBox";
+
+import "./Home.css";
 
 function Home() {
     const { user, loading } = useUser();
@@ -79,9 +81,12 @@ function Home() {
     };
 
     return (
-        <div>
+        <div className="home-page">
             <Navbar activePage="HomePage" />
-            <h1>Kommande Meetups</h1>
+            <section className="home-hero">
+            
+        </section>
+        <h2 className="home-heading">Kommande meetups</h2>
             <MeetingList onMeetingClick={handleMeetingClick} />
             {isLoading && (
                 <MessageBox message="Hämtar möten..." messageType="none" />
@@ -103,6 +108,7 @@ function Home() {
                     }}
                 />
             )}
+            <Footer />
         </div>
     );
 }

@@ -1,4 +1,4 @@
-.meetingList {
+/* .meetingList {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -7,4 +7,16 @@
     margin-right: 24px;
     width: 100%;
     max-width: 920px;
+} */
+
+.meetingList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 16px;
 }
