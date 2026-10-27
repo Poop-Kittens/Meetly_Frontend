@@ -69,7 +69,7 @@ function BasicMeetingCard({
                             onReviewClick?.(id);
                         }}
                     >
-                        Review
+                        Recensera
                     </button>
                 )
             ) : !isAttending ? (
