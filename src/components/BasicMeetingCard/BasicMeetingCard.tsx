@@ -1,7 +1,6 @@
 import "../BasicMeetingCard/BasicMeetingCard.css";
 import CardDate from "../CardDate/CardDate";
-import { signUp } from "../../api/api";
-import { cancelRegistration } from "../../api/api";
+import { signUp, cancelRegistration } from "../../api/api";
 
 interface BasicMeetingCardProps {
   id: number;
@@ -13,6 +12,7 @@ interface BasicMeetingCardProps {
   onMeetingClick: (id: number) => void;
   isAttending: boolean;
   onAttendanceChange: () => void; //Detta blir en callbackfunktion som alltså kör den riktiga funktionen i meetinglist
+  onReviewClick?: (id: number) => void; //Valfri, Home behöver den inte.
 }
 
 function BasicMeetingCard({
@@ -25,14 +25,20 @@ function BasicMeetingCard({
   onMeetingClick,
   isAttending,
   onAttendanceChange,
+  onReviewClick,
 }: BasicMeetingCardProps) {
   const meetingtime = new Date(date).toLocaleDateString("sv-SE", {
     hour: "2-digit",
     minute: "2-digit",
   });
 
+  const isPrevious = new Date(date) < new Date(); //Mötet klart när datum passerat.
+
   return (
-    <div className="meetingCard" onClick={() => onMeetingClick(id)}>
+    <div
+      className={`meetingCard ${isPrevious ? "meetingCard-previous" : ""}`}
+      onClick={() => onMeetingClick(id)}
+    >
       <CardDate date={date} />
       <div className="meetingHeading">
         <h1 className="title">{title}</h1>
@@ -48,8 +54,23 @@ function BasicMeetingCard({
         <p>{meetingtime}</p>
       </div>
       <p className="locationDisplay">{location}</p>
-      <p className="remainingSpotsDisplay">Lediga platser:{remainingSlots}</p>
-      {!isAttending ? (
+      {!isPrevious && (
+        <p className="remainingSpotsDisplay">Lediga platser:{remainingSlots}</p>
+      )}
+
+      {isPrevious ? (
+        isAttending && (
+            <button
+            className="attend review"
+            onClick={(e) => {
+                e.stopPropagation();
+                onReviewClick?.(id);
+            }}
+            >
+                Review
+                </button>
+        )
+      ) : !isAttending ? (
         <button
           className="attend"
           onClick={async (e) => {
