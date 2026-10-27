@@ -134,3 +134,9 @@
 .attend.cancel:hover {
     background-color: #ff3a3a;
 }
+.attend:disabled {
+    background-color: #e5e5e5;
+    color: #888;
+    border-color: #e5e5e5;
+    cursor: not-allowed;
+}

@@ -57,6 +57,7 @@ function BasicMeetingCard({
             {!isAttending ? (
                 <button
                     className="attend"
+                    disabled={remainingSlots <= 0}
                     onClick={async (e) => {
                         e.stopPropagation();
                         try {
