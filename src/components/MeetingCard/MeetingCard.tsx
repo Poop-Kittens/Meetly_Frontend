@@ -1,5 +1,6 @@
 //importerar typen som beskriver vilken info ett möte innehåller
 import type { MeetingResponse } from "../../types/types";
+import ReviewList from "../ReviewList/ReviewList";
 import "./MeetingCard.css";
 
 //definierar vilka props MetingCard måste få från sin föräldrakomponent
@@ -61,7 +62,7 @@ function MeetingCard({ meeting, onClose }: MeetingCardProps) {
                     </div>
                     <div className="meeting-reviews">
                         <h4>Recensioner</h4>
-                        <p>Här kommer recensionerna att visas.</p>
+                        <ReviewList participants={meeting.participants ?? []} />
                     </div>
                 </div>
             </div>
