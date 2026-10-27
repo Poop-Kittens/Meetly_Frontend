@@ -36,13 +36,17 @@
     font-weight: 600;
 }
 
-/* Kategorier */
 .categoryChip {
     display: inline-block;
-    margin: 0 8px 0 0;
+    padding: 5px 12px;
+    margin: 0;
 
-    color: #73807a;
-    font-size: 13px;
+    background-color: #e2efe5;
+    color: #3e6045;
+
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 /* Plats */

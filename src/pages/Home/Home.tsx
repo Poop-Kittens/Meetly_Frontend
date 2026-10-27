@@ -9,11 +9,13 @@ import type {
     MeetingResponse,
     MeetingSearchRequest,
 } from "../../types/types";
+import "./Home.css";
 
 import SearchForm from "../../components/SearchForm/SearchForm";
 import MeetingList from "../../components/MeetingList/MeetingList";
 import MeetingCard from "../../components/MeetingCard/MeetingCard";
 import MessageBox from "../../components/MessageBox/MessageBox";
+import Footer from "../../components/Footer/Footer";
 
 const isEmptyRequest = (request: MeetingSearchRequest) =>
     Object.values(request).every((value) => !value || value.trim() === "");
@@ -124,20 +126,23 @@ function Home() {
     };
 
     return (
-        <div>
+        <div className="home-page">
             <Navbar activePage="HomePage" />
-            <h1>Kommande Meetups</h1>
-            <SearchForm onSearch={handleMeetingSearch} />
+            <section className="home-hero">
+                <SearchForm onSearch={handleMeetingSearch} />
+            </section>
+
+            <h2 className="home-heading">Kommande meetups</h2>
+            {isLoading && (
+                <MessageBox message="Hämtar möten..." messageType="none" />
+            )}
+            {error && <MessageBox message={error} messageType="error" />}
             {!isLoading && !error && meetings.length === 0 && (
                 <MessageBox
                     message="Det finns inga kommande möten just nu."
                     messageType="warning"
                 />
             )}
-            {isLoading && (
-                <MessageBox message="Hämtar möten..." messageType="none" />
-            )}
-            {error && <MessageBox message={error} messageType="error" />}
             <MeetingList
                 meetings={meetings}
                 myMeetingIds={myMeetings.map((m) => m.id)}
@@ -154,6 +159,7 @@ function Home() {
                     }}
                 />
             )}
+            <Footer />
         </div>
     );
 }

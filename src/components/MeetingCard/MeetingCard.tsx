@@ -11,9 +11,20 @@ type MeetingCardProps = {
 //tar emot mötesinfon och funktionen för att stänga rutan
 function MeetingCard({ meeting, onClose }: MeetingCardProps) {
     return (
-      <div className="meeting-overlay">
-        <div className="meeting-card">
-          <button type="button" onClick={onClose}>✕</button>
+      <div className="meeting-overlay" onClick={onClose}>
+        <div
+            className="meeting-card"
+            onClick={(e) => e.stopPropagation()}
+        >
+            <button
+                type="button"
+                className="meeting-close"
+                onClick={onClose}
+                aria-label="Stäng mötesdetaljer"
+            >
+                ✕
+            </button>
+
             <h3>{meeting.title}</h3>
             <p>
                 {meeting.date
@@ -30,6 +41,7 @@ function MeetingCard({ meeting, onClose }: MeetingCardProps) {
             <p>📍{meeting.location}</p>
             <p>👥Lediga platser: {meeting.remainingSlots}</p>
             <p>👤Arrangör: {meeting.host?.userName}</p>
+            <p> ---------------------------------------- </p>
             <p>Kategorier: {meeting.categories?.join(", ")}</p>
         </div>
         </div>
