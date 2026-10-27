@@ -2,13 +2,19 @@ import type { UserResponse } from "../../types/types";
 import { useUser } from "../../hooks/useUser";
 import { logout } from "../../api/api";
 import "./UserCard.css";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 interface UserCardProps {
     user: UserResponse;
+    showProfileLink?: boolean;
+    onNavigate?: () => void;
 }
 
-function UserCard({ user }: UserCardProps) {
+function UserCard({
+    user,
+    showProfileLink = false,
+    onNavigate,
+}: UserCardProps) {
     const { setUser } = useUser();
     const navigate = useNavigate();
 
@@ -37,6 +43,15 @@ function UserCard({ user }: UserCardProps) {
             <hr />
             <div className="card-bottom">
                 <p>Ditt personliga konto</p>
+                {showProfileLink && (
+                    <Link
+                        className="profile-btn"
+                        to="/profile"
+                        onClick={onNavigate}
+                    >
+                        Mina sidor
+                    </Link>
+                )}
                 <button className="logout-btn" onClick={handleLogout}>
                     ➜] Logga ut
                 </button>
