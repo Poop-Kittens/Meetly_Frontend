@@ -1,17 +1,195 @@
+/* Mörk bakgrund bakom popupen */
 .meeting-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(20, 40, 35, 0.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    z-index: 1000;
 }
 
+/* Själva popup-fönstret */
 .meeting-card {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  width: 300px;
+    background-color: #fff;
+    border-radius: 16px;
+
+    padding: 0px;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    box-shadow: 0 12px 40px rgba(20, 40, 35, 0.15);
+
+    color: var(--primary-green);
+    position: relative;
+    animation: meetingFadeIn 0.2s ease-out;
+}
+
+/* Texten i popupen */
+.meeting-card p {
+    color: var(--secondary-green);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.meeting-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    background-color: var(--avatar);
+    color: var(--primary-green);
+
+    border: none;
+    border-radius: 50%;
+
+    font-size: 18px;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.meeting-close:hover {
+    background-color: var(--avatar-hover);
+}
+
+.meeting-close:focus-visible {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 3px;
+}
+
+/* Ger rubriken plats så att den inte hamnar under X-knappen */
+.meeting-card h3 {
+    color: var(--primary-green);
+    font-size: 1.6rem;
+    font-weight: 650;
+    line-height: 1.3;
+
+    margin-bottom: 20px;
+    padding-right: 35px;
+}
+
+@keyframes meetingFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.meeting-details-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+.meeting-information {
+    min-width: 0;
+}
+
+.meeting-description {
+    margin-top: 24px;
+}
+
+.meeting-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.meeting-categories .categoryChip {
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: var(--avatar);
+    color: var(--category-chip);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.meeting-reviews {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-normal);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.meeting-reviews h4 {
+    color: var(--primary-green);
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.meeting-reviews p {
+    color: #73807a;
+}
+
+.meeting-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--primary-green);
+    padding: 24px 32px;
+    border-radius: 4px 4px 0 0;
+}
+
+.meeting-modal-header h3 {
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.meeting-modal-header .meeting-close {
+    position: static;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.meeting-modal-header .meeting-close:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.meeting-details-layout {
+    padding: 32px;
+    margin-top: 0;
+}
+
+.meeting-information h4 {
+    color: var(--primary-green);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 20px;
+}
+
+.meeting-information > p:not(.meeting-description) {
+    padding: 8px 0;
+    margin: 0;
+    border-bottom: 1px solid var(--border-normal);
+}
+
+.meeting-information .meeting-description {
+    color: var(--dark-green);
+    font-size: 15px;
+    line-height: 1.7;
 }

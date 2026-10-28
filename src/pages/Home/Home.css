@@ -1,0 +1,32 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.home-hero {
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-image: url("../../assets/header.png");
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+}
+
+.home-hero p {
+    color: var(--secondary-green);
+    font-size: 1.1rem;
+}
+
+.home-heading {
+    max-width: 920px;
+    margin: 40px auto 24px;
+    color: var(--primary-green);
+    font-size: 1.6rem;
+}
+
+.home-page .footer {
+    margin-top: 3rem;
+}

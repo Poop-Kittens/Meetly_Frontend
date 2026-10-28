@@ -1,0 +1,73 @@
+.search-form {
+    background-color: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 14px;
+}
+
+.search-form label {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.5rem; /* space between label text and input */
+    min-width: 0;
+}
+
+.search-form input,
+.search-form select {
+    height: 40px;
+    padding: 0 1rem;
+    border: 1px solid var(--border-input);
+    border-radius: 8px;
+    background-color: #fff;
+    color: var(--primary-green);
+    width: 100%;
+    min-width: 0;
+    font-family: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.search-form input:focus,
+.search-form select:focus {
+    outline: 2px solid var(--border-input-focus);
+    outline-offset: 1px;
+}
+
+.search-form .clear-btn {
+    grid-column: 3;
+    grid-row: 1;
+    padding: 12px 16px;
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.search-form .clear-btn:hover {
+    background-color: var(--hover);
+}
+
+.search-form input[type="date"] {
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--primary-green);
+    cursor: pointer;
+    min-width: 0;
+}
+
+.search-form input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.7;
+}
