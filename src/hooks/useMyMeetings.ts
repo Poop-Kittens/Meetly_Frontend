@@ -14,8 +14,28 @@ export function useMyMeetings() {
   }, []);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+    let cancelled = false;
+
+    async function loadMeetings() {
+      try {
+        const meetings = await getMyMeetings();
+
+        if (!cancelled) {
+          setMyMeetings(meetings);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          console.error("Kunde inte hämta mina möten:", e);
+        }
+      }
+    }
+
+    void loadMeetings();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return { myMeetings, refresh };
 }
