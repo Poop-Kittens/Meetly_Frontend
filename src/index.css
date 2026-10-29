@@ -10,7 +10,7 @@ html,
 body,
 #root {
     background-color: var(--background-color);
-    height: 100%;
+    min-height: 100%;
 }
 
 :root {
@@ -35,4 +35,37 @@ body,
 
     /* Category */
     --category-chip: #3e6045;
+}
+
+html {
+    min-width: 320px;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: clip;
+}
+
+#root {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+@media (max-width: 600px) {
+    html,
+    body,
+    #root {
+        width: 100%;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
 }

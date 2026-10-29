@@ -23,3 +23,16 @@
 .review-list-empty {
     color: #777;
 }
+
+@media (max-width: 600px) {
+    .review-list {
+        gap: 12px;
+        max-height: 32vh;
+        max-height: 32dvh;
+    }
+
+    .review-list-item {
+        padding: 10px 12px;
+        overflow-wrap: anywhere;
+    }
+}

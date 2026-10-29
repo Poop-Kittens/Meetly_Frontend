@@ -99,3 +99,30 @@
     text-align: center;
     text-decoration: none;
 }
+
+@media (max-width: 600px) {
+    .user-card {
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .card-top {
+        gap: 12px;
+    }
+
+    .user-card__avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+    }
+
+    .user-card__name,
+    .user-card__email {
+        overflow-wrap: anywhere;
+    }
+
+    .logout-btn,
+    .profile-btn {
+        min-height: 44px;
+    }
+}

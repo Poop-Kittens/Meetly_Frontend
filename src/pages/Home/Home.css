@@ -30,3 +30,26 @@
 .home-page .footer {
     margin-top: 3rem;
 }
+
+@media (max-width: 600px) {
+    .home-page {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .home-hero {
+        min-height: 300px;
+        align-items: flex-end;
+        padding: 0 12px;
+        background-position: center;
+    }
+
+    .home-heading {
+        margin: 28px 16px 18px;
+        font-size: 1.35rem;
+    }
+
+    .home-page .footer {
+        margin-top: 2rem;
+    }
+}

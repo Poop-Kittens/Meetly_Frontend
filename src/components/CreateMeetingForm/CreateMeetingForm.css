@@ -221,12 +221,52 @@
 
 /* Mindre skärmar */
 @media (max-width: 600px) {
+    .create-meeting-overlay {
+        align-items: flex-start;
+        padding: max(8px, env(safe-area-inset-top)) 8px
+            max(8px, env(safe-area-inset-bottom));
+    }
+
+    .create-meeting-form {
+        max-height: calc(100vh - 16px);
+        max-height: calc(100dvh - 16px);
+        border-radius: 12px;
+    }
+
     .create-meeting-header,
     .create-meeting-content {
-        padding: 20px;
+        padding: 18px;
+    }
+
+    .create-meeting-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .create-meeting-content {
+        gap: 10px;
+        padding-bottom: max(18px, env(safe-area-inset-bottom));
+    }
+
+    .create-meeting-content input:not([type="checkbox"]),
+    .create-meeting-content textarea {
+        font-size: 16px;
+    }
+
+    .create-meeting-content fieldset {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .create-meeting-content fieldset label {
+        min-height: 32px;
     }
 
     .create-meeting-actions {
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .create-meeting-actions button {
+        min-height: 44px;
     }
 }

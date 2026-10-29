@@ -93,3 +93,31 @@
     outline-offset: 4px;
     border-radius: 4px;
 }
+
+@media (max-width: 600px) {
+    .login-form {
+        gap: 14px;
+        padding: 24px 20px;
+        border-radius: 12px;
+    }
+
+    .login-form h1 {
+        font-size: 1.5rem;
+    }
+
+    .login-form input {
+        min-width: 0;
+        height: 46px;
+        padding: 0 12px;
+    }
+
+    .login-form .register-btn {
+        align-self: flex-start;
+        min-height: 40px;
+        text-align: left;
+    }
+
+    .login-form .submit-btn {
+        height: 46px;
+    }
+}

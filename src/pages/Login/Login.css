@@ -16,3 +16,14 @@
 .login-page > * {
     width: 100%;
 }
+
+@media (max-width: 600px) {
+    .login-page {
+        justify-content: flex-start;
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: auto;
+        padding: max(24px, env(safe-area-inset-top)) 16px
+            max(24px, env(safe-area-inset-bottom));
+    }
+}

@@ -4,10 +4,11 @@ interface CardDateProps {
 }
 
 function CardDate({ date }: CardDateProps) {
-    const today = new Date();
+    const now = new Date().getTime();
+    const meetingTimestamp = Date.parse(date);
     const meetingdate = new Date(date);
 
-    if (today > meetingdate) {
+    if (now > meetingTimestamp) {
         return (
             <div className="cardDate passed-date">
                 <p>✔</p>
