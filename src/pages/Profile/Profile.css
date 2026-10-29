@@ -57,3 +57,33 @@
 .create-meeting-button:hover {
     background: var(--hover);
 }
+
+@media (max-width: 600px) {
+    .profile-header {
+        margin-top: 26px;
+        padding: 0 16px;
+    }
+
+    .profile-header h1 {
+        font-size: 2rem;
+    }
+
+    .profile-header p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .profile-heading {
+        margin: 30px 0 16px;
+        font-size: 1.35rem;
+    }
+
+    .profile-main {
+        padding-bottom: 36px;
+    }
+
+    .create-meeting-button {
+        width: 100%;
+        min-height: 48px;
+    }
+}

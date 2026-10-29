@@ -184,9 +184,46 @@
     background-color: var(--avatar-hover);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    .review-overlay {
+        align-items: flex-start;
+        padding: max(8px, env(safe-area-inset-top)) 8px
+            max(8px, env(safe-area-inset-bottom));
+    }
+
+    .review-form {
+        max-height: calc(100vh - 16px);
+        max-height: calc(100dvh - 16px);
+        border-radius: 12px;
+    }
+
     .review-modal-header,
     .review-body {
-        padding: 20px;
+        padding: 18px;
+    }
+
+    .review-modal-header h3 {
+        font-size: 1.3rem;
+    }
+
+    .review-field label {
+        font-size: 16px;
+    }
+
+    .review-form textarea,
+    .review-form select {
+        font-size: 16px;
+    }
+
+    .review-actions {
+        flex-direction: column-reverse;
+    }
+
+    .review-form .review-actions button {
+        min-height: 44px;
+    }
+
+    .review-body {
+        padding-bottom: max(18px, env(safe-area-inset-bottom));
     }
 }

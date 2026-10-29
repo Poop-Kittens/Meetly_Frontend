@@ -157,3 +157,80 @@
     opacity: 0.4;
     cursor: not-allowed;
 }
+
+@media (max-width: 600px) {
+    .meetingCard {
+        grid-template-columns: 52px minmax(0, 1fr);
+        grid-template-rows: auto auto auto auto auto;
+        column-gap: 12px;
+        row-gap: 8px;
+        min-height: 0;
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    .meetingCard:hover {
+        transform: none;
+    }
+
+    .cardDate {
+        grid-column: 1;
+        grid-row: 1 / 6;
+        width: 52px;
+        min-height: 68px;
+        align-self: start;
+    }
+
+    .meetingHeading {
+        grid-column: 2;
+        grid-row: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        min-width: 0;
+    }
+
+    .meetingCard .title {
+        font-size: 17px;
+        overflow-wrap: anywhere;
+    }
+
+    .categoryList {
+        gap: 6px;
+    }
+
+    .categoryChip {
+        padding: 4px 9px;
+        font-size: 11px;
+    }
+
+    .timedisplay {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 14px;
+    }
+
+    .locationDisplay {
+        grid-column: 2;
+        grid-row: 3;
+        overflow-wrap: anywhere;
+    }
+
+    .remainingSpotsDisplay {
+        grid-column: 2;
+        grid-row: 4;
+        margin: 0;
+        text-align: left;
+    }
+
+    .attend {
+        grid-column: 2;
+        grid-row: 5;
+        justify-self: start;
+        max-width: 100%;
+        min-height: 42px;
+        padding: 10px 12px;
+        white-space: normal;
+        text-align: center;
+    }
+}

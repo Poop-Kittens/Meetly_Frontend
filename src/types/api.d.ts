@@ -541,9 +541,10 @@ export interface components {
             title?: string | null;
             /** Format: date-time */
             date?: string;
-            location?: string;
-            remainingSlots: number;
-            categories: string[];
+            location?: string | null;
+            /** Format: int32 */
+            remainingSlots?: number;
+            categories?: string[] | null;
         };
         CategoryResponse: {
             /** Format: int32 */
@@ -582,9 +583,7 @@ export interface components {
             date?: string;
             /** Format: int32 */
             remainingSlots?: number;
-            participants?:
-                | components["schemas"]["MeetingParticipantResponse"][]
-                | null;
+            participants?: components["schemas"]["MeetingParticipantResponse"][] | null;
             categories?: string[] | null;
             host?: components["schemas"]["UserResponse"];
         };

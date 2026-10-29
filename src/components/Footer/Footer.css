@@ -35,3 +35,22 @@
     color: var(--avatar-hover);
     font-size: 12px;
 }
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 26px 18px max(18px, env(safe-area-inset-bottom));
+    }
+
+    .footer-content {
+        padding-bottom: 18px;
+    }
+
+    .footer-content h2 {
+        font-size: 21px;
+    }
+
+    .footer-content p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+}

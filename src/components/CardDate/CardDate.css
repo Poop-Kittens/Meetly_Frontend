@@ -31,3 +31,24 @@
 .cardDate.passed-date p {
     font-size: 2.5rem;
 }
+
+@media (max-width: 600px) {
+    .cardDate {
+        width: 52px;
+        min-height: 68px;
+        gap: 3px;
+        border-radius: 10px;
+    }
+
+    .cardDate p {
+        font-size: 11px;
+    }
+
+    .cardDate p:nth-child(2) {
+        font-size: 23px;
+    }
+
+    .cardDate.passed-date p {
+        font-size: 2rem;
+    }
+}
