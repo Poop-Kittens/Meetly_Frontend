@@ -41,3 +41,19 @@
     flex: 1;
     padding-bottom: 60px;
 }
+
+.create-meeting-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.create-meeting-button:hover {
+    background: var(--hover);
+}

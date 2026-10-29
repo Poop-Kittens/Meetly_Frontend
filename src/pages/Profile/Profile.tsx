@@ -4,6 +4,7 @@ import { useUser } from "../../hooks/useUser";
 import { useMyMeetings } from "../../hooks/useMyMeetings";
 import type { MeetingResponse, BasicMeetingResponse } from "../../types/types";
 import { getMeeting } from "../../api/api";
+import CreateMeetingForm from "../../components/CreateMeetingForm/CreateMeetingForm";
 import "./Profile.css";
 
 import Navbar from "../../components/Navbar/Navbar";
@@ -20,6 +21,7 @@ function Profile() {
         useState<MeetingResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [reviewingId, setReviewingId] = useState<number | null>(null);
+    const [isCreateMeetingOpen, setIsCreateMeetingOpen] = useState(false);
 
     if (loading) {
         return <MessageBox message="Laddar användare..." messageType="none" />;
@@ -60,6 +62,13 @@ function Profile() {
                 <header className="profile-header">
                     <h1>Mina sidor</h1>
                     <p>En liten samling av dina saker och ting</p>
+                    <button
+                        type="button"
+                        className="create-meeting-button"
+                        onClick={() => setIsCreateMeetingOpen(true)}
+                    >
+                        + Skapa möte
+                    </button>
                 </header>
 
                 {upcoming.length > 0 ? (
@@ -105,6 +114,13 @@ function Profile() {
                 <ReviewForm
                     meetingId={reviewingId}
                     onClose={() => setReviewingId(null)}
+                />
+            )}
+
+            {isCreateMeetingOpen && (
+                <CreateMeetingForm
+                    onClose={() => setIsCreateMeetingOpen(false)}
+                    onCreated={refresh}
                 />
             )}
 
