@@ -63,12 +63,12 @@ function Profile() {
                     <h1>Mina sidor</h1>
                     <p>En liten samling av dina saker och ting</p>
                     <button
-    type="button"
-    className="create-meeting-button"
-    onClick={() => setIsCreateMeetingOpen(true)}
->
-    + Skapa möte
-</button>
+                        type="button"
+                        className="create-meeting-button"
+                        onClick={() => setIsCreateMeetingOpen(true)}
+                    >
+                        + Skapa möte
+                    </button>
                 </header>
 
                 {upcoming.length > 0 ? (
@@ -116,11 +116,13 @@ function Profile() {
                     onClose={() => setReviewingId(null)}
                 />
             )}
+
             {isCreateMeetingOpen && (
-    <CreateMeetingForm
-        onClose={() => setIsCreateMeetingOpen(false)}
-    />
-)}
+                <CreateMeetingForm
+                    onClose={() => setIsCreateMeetingOpen(false)}
+                    onCreated={refresh}
+                />
+            )}
 
             <Footer />
         </div>
