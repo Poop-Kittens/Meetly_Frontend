@@ -1,22 +1,24 @@
-
 import { useState, useEffect } from "react";
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 import { createMeeting, getCategories } from "../../api/api";
 import type { CreateMeetingRequest, CategoryResponse } from "../../types/types";
 import "./CreateMeetingForm.css";
 
 type CreateMeetingFormProps = {
     onClose: () => void;
+    onCreated?: () => void;
 };
 
-function CreateMeetingForm({ onClose }: CreateMeetingFormProps) {
+function CreateMeetingForm({ onClose, onCreated }: CreateMeetingFormProps) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState("");
     const [date, setDate] = useState("");
     const [maxAttendants, setMaxAttendants] = useState(10);
     const [categories, setCategories] = useState<CategoryResponse[]>([]);
-    const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
+    const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>(
+        [],
+    );
     const [isSaving, setIsSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -47,7 +49,7 @@ function CreateMeetingForm({ onClose }: CreateMeetingFormProps) {
     }, []);
 
     // Skapar ett nytt möte
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: SubmitEvent) => {
         e.preventDefault();
 
         if (isSaving) return;
@@ -92,6 +94,7 @@ function CreateMeetingForm({ onClose }: CreateMeetingFormProps) {
         try {
             setIsSaving(true);
             await createMeeting(meetingData);
+            onCreated?.();
             onClose();
         } catch (err) {
             console.error("Kunde inte skapa mötet:", err);
@@ -139,9 +142,7 @@ function CreateMeetingForm({ onClose }: CreateMeetingFormProps) {
                         required
                     />
 
-                    <label htmlFor="meeting-description">
-                        Beskrivning
-                    </label>
+                    <label htmlFor="meeting-description">Beskrivning</label>
                     <textarea
                         id="meeting-description"
                         value={description}
@@ -150,54 +151,55 @@ function CreateMeetingForm({ onClose }: CreateMeetingFormProps) {
                         maxLength={300}
                     />
 
-                    
-<div className="create-meeting-row">
-    <div className="create-meeting-field">
-        <label htmlFor="meeting-location">Plats</label>
-        <input
-            id="meeting-location"
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Var ska mötet hållas?"
-            required
-        />
-    </div>
+                    <div className="create-meeting-row">
+                        <div className="create-meeting-field">
+                            <label htmlFor="meeting-location">Plats</label>
+                            <input
+                                id="meeting-location"
+                                type="text"
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
+                                placeholder="Var ska mötet hållas?"
+                                required
+                            />
+                        </div>
 
-    <div className="create-meeting-field">
-        <label htmlFor="meeting-date">Datum och tid</label>
-        <input
-            id="meeting-date"
-            type="datetime-local"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            min={(() => {
-                const now = new Date();
-                const localNow = new Date(
-                    now.getTime() - now.getTimezoneOffset() * 60000,
-                );
-                return localNow.toISOString().slice(0, 16);
-            })()}
-            required
-        />
-    </div>
+                        <div className="create-meeting-field">
+                            <label htmlFor="meeting-date">Datum och tid</label>
+                            <input
+                                id="meeting-date"
+                                type="datetime-local"
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                                min={(() => {
+                                    const now = new Date();
+                                    const localNow = new Date(
+                                        now.getTime() -
+                                            now.getTimezoneOffset() * 60000,
+                                    );
+                                    return localNow.toISOString().slice(0, 16);
+                                })()}
+                                required
+                            />
+                        </div>
 
-    <div className="create-meeting-field">
-        <label htmlFor="meeting-max-attendants">
-            Max antal deltagare
-        </label>
-        <input
-            id="meeting-max-attendants"
-            type="number"
-            min="1"
-            step="1"
-            value={maxAttendants}
-            onChange={(e) => setMaxAttendants(Number(e.target.value))}
-            required
-        />
-    </div>
-</div>
-
+                        <div className="create-meeting-field">
+                            <label htmlFor="meeting-max-attendants">
+                                Max antal deltagare
+                            </label>
+                            <input
+                                id="meeting-max-attendants"
+                                type="number"
+                                min="1"
+                                step="1"
+                                value={maxAttendants}
+                                onChange={(e) =>
+                                    setMaxAttendants(Number(e.target.value))
+                                }
+                                required
+                            />
+                        </div>
+                    </div>
 
                     <fieldset>
                         <legend>Välj kategorier</legend>
@@ -223,13 +225,11 @@ function CreateMeetingForm({ onClose }: CreateMeetingFormProps) {
                                                     ],
                                                 );
                                             } else {
-                                                setSelectedCategoryIds(
-                                                    (prev) =>
-                                                        prev.filter(
-                                                            (id) =>
-                                                                id !==
-                                                                categoryId,
-                                                        ),
+                                                setSelectedCategoryIds((prev) =>
+                                                    prev.filter(
+                                                        (id) =>
+                                                            id !== categoryId,
+                                                    ),
                                                 );
                                             }
                                         }}
