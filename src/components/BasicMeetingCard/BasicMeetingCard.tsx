@@ -33,7 +33,8 @@ function BasicMeetingCard({
         minute: "2-digit",
     });
 
-    const isPrevious = new Date(date) < new Date(); //Mötet klart när datum passerat.
+    const isPrevious =
+        Date.parse(date) < new Date().getTime(); //Mötet klart när datum passerat.
 
     const runAndRefresh = async (action: () => Promise<unknown>) => {
         try {

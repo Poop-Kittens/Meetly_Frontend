@@ -193,3 +193,51 @@
     font-size: 15px;
     line-height: 1.7;
 }
+
+@media (max-width: 600px) {
+    .meeting-overlay {
+        align-items: flex-start;
+        padding: max(8px, env(safe-area-inset-top)) 8px
+            max(8px, env(safe-area-inset-bottom));
+    }
+
+    .meeting-card {
+        max-height: calc(100vh - 16px);
+        max-height: calc(100dvh - 16px);
+        border-radius: 12px;
+    }
+
+    .meeting-modal-header {
+        gap: 12px;
+        padding: 18px;
+    }
+
+    .meeting-modal-header h3 {
+        font-size: 1.25rem;
+        overflow-wrap: anywhere;
+    }
+
+    .meeting-modal-header .meeting-close {
+        width: 38px;
+        height: 38px;
+    }
+
+    .meeting-details-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+        padding: 18px;
+    }
+
+    .meeting-details-layout h4,
+    .meeting-reviews h4 {
+        font-size: 17px;
+    }
+
+    .meeting-information > p:not(.meeting-description) {
+        overflow-wrap: anywhere;
+    }
+
+    .meeting-reviews {
+        padding: 16px;
+    }
+}

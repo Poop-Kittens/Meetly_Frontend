@@ -33,15 +33,15 @@ function Profile() {
     }
 
     const myMeetingIds = myMeetings.map((m) => m.id);
-    const now = new Date();
-    const time = (m: BasicMeetingResponse) => new Date(m.date).getTime();
+    const now = new Date().getTime();
+    const time = (m: BasicMeetingResponse) => Date.parse(m.date);
 
     const upcoming = myMeetings
-        .filter((m) => new Date(m.date) >= now)
+        .filter((m) => time(m) >= now)
         .sort((a, b) => time(a) - time(b));
 
     const past = myMeetings
-        .filter((m) => new Date(m.date) < now)
+        .filter((m) => time(m) < now)
         .sort((a, b) => time(b) - time(a));
 
     const handleMeetingClick = async (id: number) => {
